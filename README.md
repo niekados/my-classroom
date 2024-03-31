@@ -2,7 +2,7 @@
 
 ## Introduction
 
-MyClassroom is a classroom management tool born from an understanding of the diverse needs of students and the challenges faced by teachers in addressing them. MyClassroom aims to simplify the complex task of classroom management while ensuring that every child receives the care and attention they deserve.
+MyClassroom is a command line interface application running in Python terminal. A classroom management tool born from an understanding of the diverse needs of students and the challenges faced by teachers in addressing them. MyClassroom aims to simplify the complex task of classroom management while ensuring that every child receives the care and attention they deserve. 
 
 With MyClassroom, teachers gain access to a simple overview of their classrooms, allowing them to track students' medical or dietary needs, preferences, and behaviors effortlessly. From dietary restrictions to social anxieties, MyClassroom empowers teachers to provide personalized support, fostering an inclusive and nurturing learning environment for all.
 
@@ -17,15 +17,54 @@ I wondered about the tools available to teachers for sharingthis important infor
 ## User Stories
 
 - As a teacher, I want easy access to a classroom overview with all students listed.
-- As a teacher, I want the ability to filter children who may require additional assistance for a quick overview.
+- As a teacher, I want the ability to filter children who may require additional assistance in the class.
 - As a kitchen worker, I need access to any additional dietary requirements before preparing meals for the school.
-- As a teacher or medical personnel, I need information on all children with allergies.
-- As a teacher or medical personnel, I need information on all children with dietary requirements.
-- As a teacher or medical personnel, I need information on all children taking medications.
-- As a teacher or medical personnel, I need information on all children with special needs.
-- As a teacher or medical personnel, I need a list of notes for all children.
-- As a teacher or medical personnel, I need easy access to information on all children with any needs or medical conditions.
+- As a teacher or medical personnel, I want to be able to filter all children in school based on specific criteria such as allergies, dietary requirements, medications, or special needs.
 - As a teacher, I want to add a new student to the classroom.
 - As a teacher, I want to create a new classroom.
 - As a teacher, I want to remove a student from the class.
 - As a teacher, I want to remove a classroom.
+
+## Flowchart
+
+## How To Use MyClassroom 
+
+## Features
+
+## Data Model
+
+## Setting up Google API
+
+1. Login to (Google Cloud Platform)[https://cloud.google.com/]
+2. Click the drop-down menu next to the "Google Cloud" logo (it may display the name of another project you are currently working on) and select "NEW PROJECT" to create a new project.
+3. Enter the name of your project in the provided field on the new screen, then click "Create" to proceed.
+4. After creating your project, return to the main page of Google Cloud Platform. Select the project you just created from the drop-down menu next to the "Google Cloud" logo.
+5. In the "Quick Access" menu, click on "APIs & Services".
+6. In the new window, select the "Libraries" option from the menu on the left side of your screen.
+7. In the "API library" window, use the search bar to find "Google Drive API".
+8. From the search results, select "Google Drive API" and click the "ENABLE" button.
+9. A new window titled "Enabled APIs and services" will open. To grant permission for your Python project to access Google Drive, you will need to generate credentials.
+10. Click on the "CREATE CREDENTIALS" button.
+11. In the "Credential Type" window:
+    1. In the "Which API are you using?" section, select "Google Drive API" from the drop-down menu.
+    2. In the "What data will you be accessing?" section, select "Application Data", then click "Next".
+12. In the "Service account details" section, enter a name for your service account, then click "CREATE AND CONTINUE".
+13. In the "Grant this service account access to the project" section, select **Basic > Editor** from the "Select a role" drop-down menu, then click "Continue".
+14. Leave the options in the "Grant users access to this service account (optional)" section blank, then click "DONE".
+15. You will be taken back to the "APIs and services" screen. Select the "Credentials" option from the menu on the left side of the screen.
+16. Click on your newly created service account in the "Service accounts" section, then select the "KEYS" tab.
+17. In the "ADD KEY" drop-down menu, select "Create New Key".
+18. Choose "JSON" as the key type, then click "Create".
+19. This will download a JSON file containing your API credentials to your computer.
+20. Return to the "API Library" and search for "Google Sheets API".
+21. Select "Google Sheets API" from the search results, then click "ENABLE" to enable it.
+
+## Deployment
+
+## Technologies Used
+
+## Python Libraries
+
+## Testing 
+
+## Credits
