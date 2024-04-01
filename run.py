@@ -264,6 +264,71 @@ def get_valid_string_input(prompt):
             # Print the error message
             print(e)  # Print the error message for invalid input
 
+def add_new_student_menu():
+    """
+    Add a new student through a menu-driven interface.
+    """
+    clear_console()  # Clear the console screen
+    print_menu_title("Add New Student")  # Print menu title
+
+    # Get student name and validate it
+    print("(Minimum 3 characters. No digits or special characters.)")
+    student_name = get_valid_string_input("Enter students first name: ")
+    print("\n(Minimum 3 characters. No digits or special characters.)")
+    student_surname = get_valid_string_input("Enter student surname: ")
+
+    # Concatenate first name and last name
+    student_full_name = f"{student_name.capitalize()} {student_surname.capitalize()}"
+
+    # Check if student has medical conditions
+    while True:
+        print(f"\nNew Student: {student_full_name}")
+        has_medical_conditions = input("Does the student have any medical conditions? (y/n): ").strip().lower()
+
+        if has_medical_conditions == 'y':
+            allergies = input("Enter allergies (Press enter to skip): ").strip()
+            dietary = input("Enter dietary restrictions (Press enter to skip): ").strip()
+            medication = input("Enter medications (Press enter to skip): ").strip()
+            special_needs = input("Enter special needs (Press enter to skip): ").strip()
+            notes = input("Enter any additional notes (Press enter to skip): ").strip()
+            break
+        elif has_medical_conditions == 'n':
+            allergies = ""
+            dietary = ""
+            medication = ""
+            special_needs = ""
+            notes = ""
+            break
+        else:
+            print("Invalid input. Please enter either 'y' or 'n'.")
+
+    # Get class to add the student to
+    menu_title = "Select classroom to add the student to:"
+    classroom_options = []
+    all_classrooms = SHEET.worksheets()
+    for classroom in all_classrooms:
+        if classroom.title != "sid":
+            classroom_options.append(classroom.title)
+
+    # Display the classroom options
+    show_menu(classroom_options, menu_title)
+
+    # Get a valid choice from the user
+    choice = get_valid_choice(classroom_options)
+
+    if choice == len(classroom_options) + 1:
+        press_enter_to_continue()
+        return
+    else:
+        # Create a new student object
+        new_student = Student(student_full_name, allergies, dietary, medication, special_needs, notes)
+
+        # Add the student to the selected classroom
+        new_student.add_student(classroom_options[choice - 1])
+
+    print(f"Student {student_full_name} added to classroom {classroom_options[choice - 1]}")
+    press_enter_to_continue()
+
 def select_classroom(check_empty_med_cells=False):
     """
     Displays a menu for selecting a classroom and shows the students' information in the chosen classroom.
