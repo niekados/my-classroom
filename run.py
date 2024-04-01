@@ -236,6 +236,34 @@ def get_valid_choice(menu_options):
             # Print error message for invalid input (non-integer)
             print("Invalid input. Please enter a number.")
 
+def get_valid_string_input(prompt):
+    """
+    Get a valid string input from the user consisting only of alphabetical characters or spaces.
+    
+    Args:
+        prompt (str): The prompt message to display to the user.
+
+    Returns:
+        str: A valid string input consisting only of alphabetical characters or spaces.
+
+    Raises:
+        ValueError: If the input contains characters other than alphabetical characters or spaces.
+    """
+    while True:
+        try:
+            # Prompt the user for input and remove leading/trailing whitespace
+            value = input(prompt).strip()
+
+            # Check if the input consists of string starting with at least 3 letters followed by optional spaces and another string.
+            if re.match("^[a-zA-Z]{3,}\s?[a-zA-Z]*$", value):
+                return value
+            else:
+                # Raise ValueError for invalid input
+                raise ValueError("Invalid input. Please enter alphabetical characters only. (Minimum 3 characters. Can include space.)")
+        except ValueError as e:
+            # Print the error message
+            print(e)  # Print the error message for invalid input
+
 def select_classroom(check_empty_med_cells=False):
     """
     Displays a menu for selecting a classroom and shows the students' information in the chosen classroom.
