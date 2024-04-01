@@ -77,6 +77,44 @@ def get_valid_choice(menu_options):
             # Print error message for invalid input (non-integer)
             print("Invalid input. Please enter a number.")
 
+def medical_menu():
+    """
+    Displays a menu for selecting medical options and performs corresponding actions.
+
+    Options:
+    1. Allergies (Displays students with allergies)
+    2. Dietary Requirements (Displays students with dietary requirements)
+    3. Medication (Displays students with medication information)
+    4. Special Needs (Displays students with special needs)
+    5. Notes (Displays students' medical notes)
+    6. All (Displays students with all medical information)
+    """
+    menu_title = "Medical Menu"
+    medical_options = ["Allergies", "Dietary", "Medication", "Special Needs", "Notes", "All"]
+    
+    # Display the menu options
+    show_menu(medical_options, menu_title)
+    
+    # Get the user's choice
+    choice = get_valid_choice(medical_options)
+    
+    if choice == len(medical_options) + 1:
+        return  # Quit
+    elif 1 <= choice <= len(medical_options):
+        selected_option = medical_options[choice - 1]
+        clear_console()
+        print_menu_title(selected_option)
+        
+        # Filter worksheets based on the selected medical option
+        if choice == 6:
+            # For option 'All', display all medical information
+            filter_all_worksheets("name", "allergies", "dietary", "medication", "special needs", "notes", check_empty_med_cells=True)
+        else:
+            # For individual medical options, display respective information
+            filter_all_worksheets("name", selected_option.lower(), check_empty_med_cells=True)
+        
+        press_enter_to_continue()  # Wait for user to press Enter before returning to main menu
+
 def admin_menu():
     """
     Displays a menu for administrative tasks and performs the corresponding actions.
