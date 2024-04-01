@@ -43,6 +43,20 @@ def my_class_logo():
         print('*** Welcome to MyClassroom ***')  
         print(' Copyright - Vilmantas - 2024')  
 
+def mini_logo():
+    """
+    Prints small MyClassroom logo to the console.
+    """
+    mini_logo_table = Table(show_header=False)
+    mini_logo_table.add_row('*** MyClassroom ***')  
+
+    # Attempt to print the logo with console.print
+    try:
+        console.print(mini_logo_table)
+    # If an error occurs, print the logo with regular print
+    except:
+        print('*** MyClassroom ***')
+
 def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
     """
     Filters the classroom worksheet based on the provided column headers.
