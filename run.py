@@ -82,6 +82,32 @@ def get_valid_choice(menu_options):
             # Print error message for invalid input (non-integer)
             print("Invalid input. Please enter a number.")
 
+def classroom_menu():
+    """
+    Displays a menu for selecting a classroom and its options.
+
+    Allows the user to choose between different classroom options.
+
+    Options:
+    1. My Classroom
+    2. My Classroom - Extra Care (Displays students with empty medical cells)
+    """
+    menu_title = "Classroom Menu"
+    classroom_options = ["My Classroom", "My Classroom - Extra Care"]
+    
+    # Display the menu options
+    show_menu(classroom_options, menu_title)
+    
+    # Get the user's choice
+    choice = get_valid_choice(classroom_options)
+    
+    if choice == len(classroom_options) + 1:
+        return  # Quit
+    elif choice == 1:
+        select_classroom()  # Call select_classroom without checking for empty medical cells
+    elif choice == 2:
+        select_classroom(check_empty_med_cells=True)  # Call select_classroom with checking for empty medical cells
+
 def kitchen_menu():
     """
     Displays a menu for selecting kitchen options and performs corresponding actions.
