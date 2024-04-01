@@ -82,6 +82,31 @@ def get_valid_choice(menu_options):
             # Print error message for invalid input (non-integer)
             print("Invalid input. Please enter a number.")
 
+def kitchen_menu():
+    """
+    Displays a menu for selecting kitchen options and performs corresponding actions.
+
+    Options:
+    1. Dietary Requirements (Displays students with dietary information)
+    """
+    menu_title = "Kitchen Menu"
+    kitchen_options = ["Dietary Requirements"]
+    
+    # Display the menu options
+    show_menu(kitchen_options, menu_title)
+    
+    # Get the user's choice
+    choice = get_valid_choice(kitchen_options)
+    
+    if choice == len(kitchen_options) + 1:
+        return  # Quit
+    elif choice == 1:
+        clear_console()
+        print_menu_title("Dietary Requirements")
+        # Display students' dietary requirements
+        filter_all_worksheets("name", "dietary", "allergies", check_empty_med_cells=True)
+        press_enter_to_continue()  # Wait for user to press Enter before returning to main menu
+
 def medical_menu():
     """
     Displays a menu for selecting medical options and performs corresponding actions.
