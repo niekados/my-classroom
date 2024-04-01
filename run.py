@@ -1,5 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import os
+import re
 
 # Google Sheets authentication
 SCOPE = [
@@ -16,3 +18,33 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # Opening the Google Sheets document named 'my_classroom'
 SHEET = GSPREAD_CLIENT.open('my_classroom')
 
+
+def main():
+    """
+    Displays the main menu and executes the selected option.
+
+    The main menu allows the user to navigate to different sections of the program, including Classroom, Kitchen, Medical, and Admin.
+    """
+    while True:
+        # Display the main menu options
+        menu_title = "Main Menu"
+        main_options = ["Classroom", "Kitchen", "Medical", "Admin"]
+        show_menu(main_options, menu_title)
+        
+        # Get the user's choice
+        choice = get_valid_choice(main_options)
+        
+        # Perform actions based on user's choice
+        if choice == len(main_options) + 1:
+            print("Goodbye!")
+            break  # Quit
+        elif choice == 1:
+            classroom_menu()  # Navigate to Classroom menu
+        elif choice == 2:
+            kitchen_menu()  # Navigate to Kitchen menu
+        elif choice == 3:
+            medical_menu()  # Navigate to Medical menu
+        elif choice == 4:
+            admin_menu()  # Navigate to Admin menu
+
+main()

@@ -35,7 +35,7 @@ I wondered about the tools available to teachers for sharingthis important infor
 
 ## Setting Up Google API
 
-1. Login to (Google Cloud Platform)[https://cloud.google.com/]
+1. Login to [Google Cloud Platform](https://cloud.google.com/)
 2. Click the drop-down menu next to the "Google Cloud" logo (it may display the name of another project you are currently working on) and select "NEW PROJECT" to create a new project.
 3. Enter the name of your project in the provided field on the new screen, then click "Create" to proceed.
 4. After creating your project, return to the main page of Google Cloud Platform. Select the project you just created from the drop-down menu next to the "Google Cloud" logo.
