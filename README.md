@@ -33,7 +33,7 @@ I wondered about the tools available to teachers for sharingthis important infor
 
 ## Data Model
 
-## Setting up Google API
+## Setting Up Google API
 
 1. Login to (Google Cloud Platform)[https://cloud.google.com/]
 2. Click the drop-down menu next to the "Google Cloud" logo (it may display the name of another project you are currently working on) and select "NEW PROJECT" to create a new project.
@@ -58,6 +58,8 @@ I wondered about the tools available to teachers for sharingthis important infor
 19. This will download a JSON file containing your API credentials to your computer.
 20. Return to the "API Library" and search for "Google Sheets API".
 21. Select "Google Sheets API" from the search results, then click "ENABLE" to enable it.
+
+
 
 ## Deployment
 
