@@ -103,6 +103,32 @@ I wondered about the tools available to teachers for sharingthis important infor
     ```python
     SHEET = GSPREAD_CLIENT.open('my_classroom')
     ```
+## Deploying Project to Heroku
+
+1. In your workspace, add dependencies to the `requirements.txt` file for Heroku to install these dependencies and be able to run them. In the IDE terminal, run this code:
+    ```
+    pip3 freeze > requirements.txt
+    ```
+    Then push the changes to your GitHub repository.
+2. Log in to [Heroku](https://heroku.com/).
+3. In the Heroku dashboard, click the "Create new app" button.
+4. In the "Create New App" section, enter the app name, select your region from the dropdown list, and click the "Create app" button.
+5. In your app's dashboard, go to the settings tab and locate the "Config Vars" section.
+6. Click the "Reveal Config Vars" button.
+7. In the "KEY" field, enter "CREDS".
+8. Go back to your workspace, copy the entire content of the "creds.json" file.
+9. Return to the Heroku "Config Vars" section, paste the content of "creds.json" into the "VALUE" field, and click the "Add" button.
+10. In the "Config Vars" section, add an additional "KEY"  ```PORT``` with the value of ```8000``` and press the "Add" button.
+11. Now scroll down to the "Buildpacks" section and click the "Add buildpack" button.
+12. Select the "python" buildpack and click the "Save changes" button.
+13. In the "Buildpacks" section, click the "Add buildpacks" button again, this time select "nodejs" and click the "Save changes" button.
+14. Ensure that buildpacks are stacked in this order: "heroku/python" on top and "heroku/nodejs" below it.
+15. In your app's dashboard, go to the "Deploy" section.
+16. In the "Deployment method" section, select "GitHub" and press the "Connect to GitHub" button.
+17. The "Search for a repository" search bar will be displayed. Enter your GitHub repository name and press the "Search" button.
+18. This should display your repository below the search bar, click the "Connect" button.
+19. Scroll down to the "Automatic deploys" section and press "Enable Automatic Deploys". This will allow Heroku to rebuild your app every time you push changes to your GitHub repository. If you prefer to deploy it manually, you can leave this option disabled and use the "Deploy Branch" button in the "Manual deploy" section to deploy your app manually.
+20. A "Your app was successfully deployed." message will be displayed, along with a button linking to the deployed app.
 
 
 ## Deployment
