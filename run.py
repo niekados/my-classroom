@@ -329,6 +329,58 @@ def add_new_student_menu():
     print(f"Student {student_full_name} added to classroom {classroom_options[choice - 1]}")
     press_enter_to_continue()
 
+def add_new_classroom():
+    """
+    Creates a new classroom worksheet based on the entered name.
+    """
+    # Initialize a list to store existing classroom names
+    classroom_names = []
+    
+    # Retrieve all worksheets from the spreadsheet
+    all_classrooms = SHEET.worksheets()
+    
+    # Clear the console screen and print menu title
+    clear_console()
+    print_menu_title("Add Classroom")
+    print("To cancel and return to Main Menu press 'Q'.\n")
+    
+    # Populate the classroom_names list with existing classroom names
+    for classroom in all_classrooms:
+        classroom_names.append(classroom.title)
+    
+    print("\nClassroom name format: YEAR + LETTER ")
+    
+    while True:
+        # Prompt the user to enter the new classroom name
+        classroom_name = input("Please enter the new classroom name: ").upper().strip()
+
+        # Check if the user wants to cancel
+        if classroom_name.lower() == "q":
+            break
+        
+        # Check if the entered classroom name already exists
+        elif classroom_name in classroom_names:
+            print(f"\nThis classroom already exists. Please enter a different classroom name.")
+            print("Or press 'Q' to return to the main menu.")
+        
+        # Validate the format of the entered classroom name
+        elif re.match('^([1-9]|1[0-2])[a-zA-Z]$', classroom_name):
+            classroom_name = classroom_name.upper()
+            
+            # Add a new worksheet with the entered classroom name
+            SHEET.add_worksheet(title=classroom_name, rows=100, cols=20)
+            
+            # Add header row to the new worksheet
+            SHEET.worksheet(classroom_name).append_row(["Id", "Name", "Allergies", "Dietary", "Medication", "Special Needs", "Notes"], table_range="A1")
+            
+            print(f"\nNew classroom successfully created: {classroom_name}")
+            press_enter_to_continue()
+            break
+
+        else:
+            print("\nInvalid classroom name format. Please enter in the format YEAR + LETTER (e.g., 2B, 4C, 10A)")
+            print("Or press 'Q' to return to the main menu.")
+
 def select_classroom(check_empty_med_cells=False):
     """
     Displays a menu for selecting a classroom and shows the students' information in the chosen classroom.
