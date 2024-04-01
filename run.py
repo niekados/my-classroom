@@ -18,6 +18,12 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # Opening the Google Sheets document named 'my_classroom'
 SHEET = GSPREAD_CLIENT.open('my_classroom')
 
+def clear_console():
+    """
+    Clears the terminal screen.
+    """
+    os.system('cls' if os.name in ('nt', 'dos') else 'clear') 
+
 def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
     """
     Filters the classroom worksheet based on the provided column headers.
