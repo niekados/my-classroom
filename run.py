@@ -82,6 +82,55 @@ def get_valid_choice(menu_options):
             # Print error message for invalid input (non-integer)
             print("Invalid input. Please enter a number.")
 
+def select_classroom(check_empty_med_cells=False):
+    """
+    Displays a menu for selecting a classroom and shows the students' information in the chosen classroom.
+
+    Args:
+        check_empty_med_cells (bool, optional): Flag indicating whether to check for empty medical cells. Defaults to False.
+            Used in filter_worksheet function.
+
+    Raises:
+        Exception: If an unexpected error occurs during the execution.
+    """
+    try:
+        menu_title = "Select Classroom"
+        classroom_options = []
+        
+        # Retrieve all classroom options from the worksheets
+        all_classrooms = SHEET.worksheets()
+        for classroom in all_classrooms:
+            if classroom.title != "sid":
+                classroom_options.append(classroom.title)
+        
+        # Show the menu to select a classroom
+        show_menu(classroom_options, menu_title)
+        choice = get_valid_choice(classroom_options)
+        
+        # Check if the user wants to quit
+        if choice == len(classroom_options) + 1:
+            return  # Quit
+        else:
+            chosen_classroom = classroom_options[choice - 1]
+            if check_empty_med_cells:
+                # Filter and display the classroom table with empty medical cells
+                classroom_table = filter_worksheet("name", "allergies", "dietary", "medication", "special needs", "notes", class_name=chosen_classroom, check_empty_med_cells=True)
+                clear_console()
+                print_menu_title(f"Classroom: {chosen_classroom}")
+                console.print(classroom_table)
+                press_enter_to_continue()
+            else:
+                # Filter and display the classroom table
+                classroom_table = filter_worksheet("name", "allergies", "dietary", "medication", "special needs", "notes", class_name=chosen_classroom)
+                clear_console()
+                print_menu_title(f"Classroom: {chosen_classroom}")
+                console.print(classroom_table)
+                press_enter_to_continue()
+    except Exception as e:
+        # Handle any unexpected errors
+        print("An error occurred:", e)
+        press_enter_to_continue()
+
 def classroom_menu():
     """
     Displays a menu for selecting a classroom and its options.
