@@ -21,6 +21,8 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # Opening the Google Sheets document named 'my_classroom'
 SHEET = GSPREAD_CLIENT.open('my_classroom')
 
+console = Console()
+
 # Credits to Sore Shark(https://www.grepper.com/profile/sore-shark-2960dft2pjr8) 
 # For his solution on how to clear console for Windows, Unix and Linux 
 # https://www.grepper.com/answers/393350/python+clear+screen+windows+and+linux
@@ -131,6 +133,15 @@ def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
 
         return table
 
+    except gspread.exceptions.WorksheetNotFound as e:
+        print(f"Worksheet '{class_name}' not found.")
+        press_enter_to_continue()
+
+    except gspread.exceptions.APIError as e:
+        print(f"Error accessing Google Sheets API: {e}")
+        press_enter_to_continue()
+        return None
+
 def filter_all_worksheets(*args, check_empty_med_cells=False):
     """
     Filters all worksheets based on the provided column headers.
@@ -165,15 +176,6 @@ def filter_all_worksheets(*args, check_empty_med_cells=False):
             else:
                 # Print error message if table retrieval failed
                 print("An error occurred while filtering worksheet.")
-
-    except gspread.exceptions.WorksheetNotFound as e:
-        print(f"Worksheet '{class_name}' not found.")
-        press_enter_to_continue()
-
-    except gspread.exceptions.APIError as e:
-        print(f"Error accessing Google Sheets API: {e}")
-        press_enter_to_continue()
-        return None
 
 def press_enter_to_continue():
     """
@@ -258,7 +260,7 @@ def get_valid_string_input(prompt):
             value = input(prompt).strip()
 
             # Check if the input consists of string starting with at least 3 letters followed by optional spaces and another string.
-            if re.match("^[a-zA-Z]{3,}\s?[a-zA-Z]*$", value):
+            if re.match("^[a-zA-Z]{3,} ?[a-zA-Z]*$", value):
                 return value
             else:
                 # Raise ValueError for invalid input
