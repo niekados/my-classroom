@@ -46,3 +46,21 @@ class Student:
         self.id = int(Student.sid.acell("A1").value)
         # Increment ID value by one for each new student
         Student.sid.update_acell("A1", f"{int(Student.sid.acell("A1").value) + 1}")
+
+    def add_student(self, worksheet_name: str):
+        """
+        Adds a new student to the specified classroom worksheet.
+
+        Args:
+            worksheet_name (str): The name of the class worksheet.
+        """
+        class_name = SHEET.worksheet(worksheet_name.upper())
+        worksheet_len = len(class_name.col_values(2)) + 1
+        # Update cells with student information
+        class_name.update_cell(worksheet_len, 1, f"{int(Student.sid.acell('A1').value) + 1}")
+        class_name.update_cell(worksheet_len, 2, self.name.capitalize())
+        class_name.update_cell(worksheet_len, 3, self.allergies.capitalize())
+        class_name.update_cell(worksheet_len, 4, self.dietary.capitalize())
+        class_name.update_cell(worksheet_len, 5, self.medication.capitalize())
+        class_name.update_cell(worksheet_len, 6, self.special_needs.capitalize())
+        class_name.update_cell(worksheet_len, 7, self.notes.capitalize())
