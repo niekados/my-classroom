@@ -18,11 +18,30 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # Opening the Google Sheets document named 'my_classroom'
 SHEET = GSPREAD_CLIENT.open('my_classroom')
 
+# Credits to Sore Shark(https://www.grepper.com/profile/sore-shark-2960dft2pjr8) 
+# For his solution on how to clear console for Windows, Unix and Linux 
+# https://www.grepper.com/answers/393350/python+clear+screen+windows+and+linux
 def clear_console():
     """
     Clears the terminal screen.
     """
     os.system('cls' if os.name in ('nt', 'dos') else 'clear') 
+
+def my_class_logo():
+    """
+    Prints the MyClassroom logo to the console.
+    """
+    my_class_logo_table = Table(show_header=False)
+    my_class_logo_table.add_row('*** Welcome to MyClassroom ***')  
+    my_class_logo_table.add_row(' Copyright - Vilmantas - 2024')
+    
+    # Attempt to print the logo with console.print
+    try:
+        console.print(my_class_logo_table)
+    # If an error occurs, print the logo with regular print
+    except:
+        print('*** Welcome to MyClassroom ***')  
+        print(' Copyright - Vilmantas - 2024')  
 
 def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
     """
