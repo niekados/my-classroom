@@ -49,6 +49,33 @@ def show_menu(menu_options, menu_title):
     else:
         print(f"{len(menu_options) + 1}. Back to Main Menu\n")
 
+def get_valid_choice(menu_options):
+    """
+    Get a valid menu choice from the user.
+
+    Args:
+        menu_options (list): List of menu options.
+
+    Returns:
+        int: Valid menu choice.
+    """
+    while True:
+        try:
+            # Prompt the user to enter a choice
+            print(f"Type a number between 1 and {len(menu_options) + 1}.")
+            choice = int(input("Enter your choice: "))
+            
+            # Check if the choice is within the valid range
+            if 1 <= choice <= len(menu_options) + 1:
+                return choice
+            else:
+                # Print error message for invalid choice
+                print(f"Invalid choice. Please enter a number between 1 and {len(menu_options) + 1}.")
+        
+        except ValueError:
+            # Print error message for invalid input (non-integer)
+            print("Invalid input. Please enter a number.")
+
 def main():
     """
     Displays the main menu and executes the selected option.
