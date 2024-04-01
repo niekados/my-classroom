@@ -49,6 +49,7 @@ def show_menu(menu_options, menu_title):
     else:
         print(f"{len(menu_options) + 1}. Back to Main Menu\n")
 
+
 def get_valid_choice(menu_options):
     """
     Get a valid menu choice from the user.
@@ -75,6 +76,38 @@ def get_valid_choice(menu_options):
         except ValueError:
             # Print error message for invalid input (non-integer)
             print("Invalid input. Please enter a number.")
+
+def admin_menu():
+    """
+    Displays a menu for administrative tasks and performs the corresponding actions.
+
+    Options:
+    1. Add Student
+    2. Add Classroom
+    3. Remove Student
+    4. Remove Classroom
+    """
+    # Display the admin menu options
+    menu_title = "Admin Menu"
+    admin_options = ["Add Student", "Add Classroom", "Remove Student", "Remove Classroom"]
+    show_menu(admin_options, menu_title)
+    
+    # Get the user's choice
+    choice = get_valid_choice(admin_options)
+    
+    # Perform actions based on user's choice
+    if choice == len(admin_options) + 1:
+        return  # Quit
+    elif 1 <= choice <= len(admin_options):
+        print(f"You chose {admin_options[choice - 1]}")
+        if choice == 1:
+            add_new_student_menu()  # Add a new student
+        elif choice == 2:
+            add_new_classroom()  # Add a new classroom
+        elif choice == 3:
+            remove_student()  # Remove a student
+        elif choice == 4:
+            remove_classroom()  # Remove a classroom
 
 def main():
     """
