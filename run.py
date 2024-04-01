@@ -434,6 +434,48 @@ def remove_student():
         # Prompt the user to return to the main menu
         press_enter_to_continue()
 
+def remove_classroom():
+    """
+    Removes a selected classroom worksheet from the spreadsheet.
+    """
+    # Initialize menu title and an empty list to store classroom names
+    menu_title = "Remove Classroom"
+    classroom_menu = []
+    
+    # Retrieve all worksheets from the spreadsheet
+    all_classrooms = SHEET.worksheets()
+    
+    # Populate classroom_menu list with existing classroom names
+    for classroom in all_classrooms:
+        if classroom.title != "sid":
+            classroom_menu.append(classroom.title)
+
+    # Display the menu with classroom options
+    show_menu(classroom_menu, menu_title)
+    
+    # Get user choice for the classroom to be removed
+    choice = get_valid_choice(classroom_menu)
+    
+    # Check if the user chose to cancel
+    if choice == len(classroom_menu) + 1:
+        return
+    else: 
+        try:
+            # Get the worksheet to be deleted
+            worksheet_to_delete = SHEET.worksheet(classroom_menu[choice - 1])
+            
+            # Delete the selected worksheet
+            SHEET.del_worksheet(worksheet_to_delete)
+            
+            # Notify the user about the successful removal
+            print(f"Classroom {classroom_menu[choice - 1]} successfully removed.")
+        except Exception as e:
+            # Print error message if worksheet deletion fails
+            print(f"An error occurred while removing classroom: {e}")
+        
+        # Prompt the user to return to the main menu
+        press_enter_to_continue()
+
 
 def select_classroom(check_empty_med_cells=False):
     """
