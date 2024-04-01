@@ -18,6 +18,11 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # Opening the Google Sheets document named 'my_classroom'
 SHEET = GSPREAD_CLIENT.open('my_classroom')
 
+def press_enter_to_continue():
+    """
+    Prompts the user to press Enter to return to the main menu.
+    """
+    input("\nPress Enter to return to the main menu...\n")
 
 def show_menu(menu_options, menu_title):
     """
