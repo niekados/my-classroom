@@ -59,6 +59,16 @@ I wondered about the tools available to teachers for sharingthis important infor
 20. Return to the "API Library" and search for "Google Sheets API".
 21. Select "Google Sheets API" from the search results, then click "ENABLE" to enable it.
 
+## Setting Up the Development Environment
+
+1. Locate the JSON file containing your Google API credentials on your computer. Drag and drop it into your workspace, then rename it to "creds.json".
+2. Open the "creds.json" file and locate the "client_email" key value. Copy this value.
+3. Navigate to your Google Sheets, open the desired spreadsheet, and click the "Share" button in the top right corner.
+4. Paste the "client_email" key value from the "creds.json" file into the sharing settings.
+5. Ensure that the "Editor" permission is selected. Uncheck the "Notify people" option, then click the "Share" button.
+6. Return to your workspace and open the ".gitignore" file, which contains a list of files that should not be committed to GitHub.
+7. Add "creds.json" to the list of ignored files in the ".gitignore" file.
+
 
 
 ## Deployment
