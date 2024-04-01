@@ -80,6 +80,41 @@ def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
 
         return table
 
+def filter_all_worksheets(*args, check_empty_med_cells=False):
+    """
+    Filters all worksheets based on the provided column headers.
+
+    Args:
+        *args: Variable length list of column headers to include in the table.
+        check_empty_med_cells (bool, optional): Check for empty medical cells (Allergies, Dietary, Medication, Special Needs). Defaults to False.
+
+    Raises:
+        gspread.exceptions.APIError: If there is an error accessing the Google Sheets API.
+    """
+    # Get all worksheets
+    all_worksheets = SHEET.worksheets()
+    
+    # Iterate over each worksheet
+    for worksheet in all_worksheets:
+        # Exclude special worksheet named 'sid'
+        if worksheet.title != "sid":
+            # Get the worksheet name
+            worksheet_name = worksheet.title
+            
+            # Print menu title
+            print_menu_title(f"Class: {worksheet_name}")
+            
+            # Call filter_worksheet to filter the current worksheet
+            table = filter_worksheet(*args, class_name=worksheet_name, check_empty_med_cells=check_empty_med_cells)
+            
+            # Check if table is successfully retrieved
+            if table is not None:
+                # Print the table
+                console.print(table)
+            else:
+                # Print error message if table retrieval failed
+                print("An error occurred while filtering worksheet.")
+
     except gspread.exceptions.WorksheetNotFound as e:
         print(f"Worksheet '{class_name}' not found.")
         press_enter_to_continue()
