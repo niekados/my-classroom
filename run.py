@@ -18,6 +18,77 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # Opening the Google Sheets document named 'my_classroom'
 SHEET = GSPREAD_CLIENT.open('my_classroom')
 
+def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
+    """
+    Filters the classroom worksheet based on the provided column headers.
+
+    Args:
+        *args: Variable length list of column headers to include in the table.
+        class_name (str, optional): The name of the class worksheet to filter.
+        check_empty_med_cells (bool, optional): Check for empty medical cells(Allergies, Dietary, Medication, Special Needs). Defaults to False.
+
+    Returns:
+        Table object containing the filtered data.
+    """
+    try:
+        # Get the class worksheet
+        classroom_worksheet = SHEET.worksheet(class_name)
+        # Retrieve all values from the worksheet
+        classroom_values = classroom_worksheet.get_all_values()
+
+        # Initialize a table with headers
+        table = Table(show_header=True)
+        column_indexes = []
+        indexes_to_check = []
+
+        # Process each column header
+        for header in args:
+            header = header.title()
+
+            # Check if the header exists in the worksheet
+            if header in classroom_values[0]:
+                # Exclude "ID" and "Name" columns
+                if header.lower() not in ["id", "name"]:
+                    indexes_to_check.append(classroom_values[0].index(header))
+                # Add the column to the table
+                table.add_column(header, max_width=40)
+                # Get the column index
+                header_column = classroom_worksheet.find(header)
+                column_indexes.append(header_column.col)
+
+        # Iterate each row in the worksheet
+        for row in classroom_values[1:]:
+            row_values = []
+
+            # Check if empty medical cells should be included
+            if check_empty_med_cells:
+                # Check if any medical cells are empty
+                if any(row[i] != "" for i in indexes_to_check):
+                    # Add non-empty row to the row values
+                    for index in column_indexes:
+                        row_values.append(row[index - 1])
+
+                    # Add the row to the table
+                    table.add_row(*row_values, end_section=True)
+            else:
+                # Add all rows to the row values
+                for index in column_indexes:
+                    row_values.append(row[index - 1])
+
+                # Add the row to the table
+                table.add_row(*row_values, end_section=True)
+
+        return table
+
+    except gspread.exceptions.WorksheetNotFound as e:
+        print(f"Worksheet '{class_name}' not found.")
+        press_enter_to_continue()
+
+    except gspread.exceptions.APIError as e:
+        print(f"Error accessing Google Sheets API: {e}")
+        press_enter_to_continue()
+        return None
+
 def press_enter_to_continue():
     """
     Prompts the user to press Enter to return to the main menu.
