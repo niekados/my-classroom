@@ -64,3 +64,19 @@ class Student:
         class_name.update_cell(worksheet_len, 5, self.medication.capitalize())
         class_name.update_cell(worksheet_len, 6, self.special_needs.capitalize())
         class_name.update_cell(worksheet_len, 7, self.notes.capitalize())
+
+    @staticmethod
+    def delete_student(classroom_name: str, row_id: int):
+        """
+        Deletes a student from the classroom.
+
+        Args:
+            classroom_name (str): The name of the class worksheet.
+            row_id (int): The row index of the student to delete.
+        """
+        worksheet = SHEET.worksheet(classroom_name.upper())
+        try:
+            worksheet.delete_rows(row_id)
+        except Exception as e:
+            print(f"Error occurred while deleting row {row_id} in worksheet {classroom_name.upper()}: {e}")
+            pass  
