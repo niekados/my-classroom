@@ -57,6 +57,15 @@ def mini_logo():
     except:
         print('*** MyClassroom ***')
 
+def print_menu_title(menu_title):
+    """
+    Prints the menu title to the console.
+    """
+    print("-" * (len(menu_title) + 6))
+    print(f"|* {menu_title} *|")
+    print("-" * (len(menu_title) + 6))
+    print()
+
 def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
     """
     Filters the classroom worksheet based on the provided column headers.
