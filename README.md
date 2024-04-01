@@ -69,6 +69,40 @@ I wondered about the tools available to teachers for sharingthis important infor
 6. Return to your workspace and open the ".gitignore" file, which contains a list of files that should not be committed to GitHub.
 7. Add "creds.json" to the list of ignored files in the ".gitignore" file.
 
+## Connecting to API with Python
+
+1. Open your IDE and install the google-auth and gspread libraries:
+    In the terminal window, type `pip3 install gspread google-auth` and press Enter.
+2. Open your Python file.
+3. Import dependencies into your Python file using:
+    ```python
+    import gspread
+    from google.oauth2.service_account import Credentials
+    ```
+4. Set the scope below:
+    ```python
+    SCOPE = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+    ]
+    ```
+5. Create a constant variable `CREDS`, passing the `creds.json` file we added earlier:
+    ```python
+    CREDS = Credentials.from_service_account_file('creds.json')
+    ```
+6. Create another variable named `SCOPED_CREDS`, passing the `SCOPE` variable:
+    ```python
+    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+    ```
+7. Create a gspread client using the `gspread.authorize` method and passing the `SCOPED_CREDS` variable:
+    ```python
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    ```
+8. Finally, create a constant variable `SHEET`, passing the name of our spreadsheet:
+    ```python
+    SHEET = GSPREAD_CLIENT.open('my_classroom')
+    ```
 
 
 ## Deployment
