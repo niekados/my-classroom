@@ -45,7 +45,8 @@ class Student:
         # Assign student id to worksheets A1 cell value
         self.id = int(Student.sid.acell("A1").value)
         # Increment ID value by one for each new student
-        Student.sid.update_acell("A1", f"{int(Student.sid.acell("A1").value) + 1}")
+        Student.sid.update_acell("A1", f"{int(Student.sid.acell('A1').value) + 1}")
+                           
 
     def add_student(self, worksheet_name: str):
         """
