@@ -152,6 +152,21 @@ I wondered about the tools available to teachers for sharingthis important infor
 
 ## Python Libraries
 
+- [gspread](https://docs.gspread.org/): A Python API for Google Sheets, allowing interaction with Google Sheets from Python scripts.
+
+- [google.oauth2.service_account](https://google-auth.readthedocs.io/en/master/reference/google.oauth2.service_account.html): A Python library for authenticating using a service account with Google APIs.
+
+- [os](https://docs.python.org/3/library/os.html): A Python library providing a portable way of using operating system dependent functionality. Utilized for clearing the terminal during menu migration to new screens.
+
+- [re](https://docs.python.org/3/library/re.html): A Python library providing support for regular expressions (RE). Used for user input validation.
+
+- [rich.console](https://rich.readthedocs.io/en/stable/introduction.html): A Python library for adding color and style to terminal text output. Used to print rich.table.
+
+- [rich.table](https://rich.readthedocs.io/en/stable/introduction.html): A Python library for creating and displaying tables with rich text formatting in the terminal. 
+
 ## Testing 
 
 ## Credits
+
+1. Credits to [Sore Shark](https://www.grepper.com/profile/sore-shark-2960dft2pjr8) for their solution on clearing the console window for Windows, Unix, and Linux.  
+   [Link to solution](https://www.grepper.com/answers/393350/python+clear+screen+windows+and+linux)
