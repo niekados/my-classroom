@@ -130,10 +130,8 @@ I wondered about the tools available to teachers for sharingthis important infor
 19. Scroll down to the "Automatic deploys" section and press "Enable Automatic Deploys". This will allow Heroku to rebuild your app every time you push changes to your GitHub repository. If you prefer to deploy it manually, you can leave this option disabled and use the "Deploy Branch" button in the "Manual deploy" section to deploy your app manually.
 20. A "Your app was successfully deployed." message will be displayed, along with a button linking to the deployed app.
 
-
-## Deployment
-
 ## Technologies Used
+
 
 ## Python Libraries
 

@@ -228,7 +228,7 @@ def get_valid_choice(menu_options):
         try:
             # Prompt the user to enter a choice
             print(f"Type a number between 1 and {len(menu_options) + 1}.")
-            choice = int(input("Enter your choice: "))
+            choice = int(input("Enter your choice: \n"))
             
             # Check if the choice is within the valid range
             if 1 <= choice <= len(menu_options) + 1:
@@ -257,7 +257,7 @@ def get_valid_string_input(prompt):
     while True:
         try:
             # Prompt the user for input and remove leading/trailing whitespace
-            value = input(prompt).strip()
+            value = input(f"{prompt}\n").strip()
 
             # Check if the input consists of string starting with at least 3 letters followed by optional spaces and another string.
             if re.match("^[a-zA-Z]{3,} ?[a-zA-Z]*$", value):
@@ -288,14 +288,14 @@ def add_new_student_menu():
     # Check if student has medical conditions
     while True:
         print(f"\nNew Student: {student_full_name}")
-        has_medical_conditions = input("Does the student have any medical conditions? (y/n): ").strip().lower()
+        has_medical_conditions = input("Does the student have any medical conditions? (y/n): \n").strip().lower()
 
         if has_medical_conditions == 'y':
-            allergies = input("Enter allergies (Press enter to skip): ").strip()
-            dietary = input("Enter dietary restrictions (Press enter to skip): ").strip()
-            medication = input("Enter medications (Press enter to skip): ").strip()
-            special_needs = input("Enter special needs (Press enter to skip): ").strip()
-            notes = input("Enter any additional notes (Press enter to skip): ").strip()
+            allergies = input("Enter allergies (Press enter to skip): \n").strip()
+            dietary = input("Enter dietary restrictions (Press enter to skip): \n").strip()
+            medication = input("Enter medications (Press enter to skip): \n").strip()
+            special_needs = input("Enter special needs (Press enter to skip): \n").strip()
+            notes = input("Enter any additional notes (Press enter to skip): \n").strip()
             break
         elif has_medical_conditions == 'n':
             allergies = ""
@@ -357,7 +357,7 @@ def add_new_classroom():
     
     while True:
         # Prompt the user to enter the new classroom name
-        classroom_name = input("Please enter the new classroom name: ").upper().strip()
+        classroom_name = input("Please enter the new classroom name: \n").upper().strip()
 
         # Check if the user wants to cancel
         if classroom_name.lower() == "q":
@@ -399,7 +399,7 @@ def remove_student():
     print("To cancel and return to Main Menu, press 'Q'.\n")
     
     # Get the student's name to be removed
-    search_keyword = get_valid_string_input("Enter the student's name to remove: ")
+    search_keyword = get_valid_string_input("Enter the student's name to remove: \n")
     
     # Check if the user wants to cancel
     if search_keyword.lower() == "q":
@@ -658,6 +658,7 @@ def main():
 
     The main menu allows the user to navigate to different sections of the program, including Classroom, Kitchen, Medical, and Admin.
     """
+    clear_console()
     while True:
         # Display the main menu options
         menu_title = "Main Menu"
