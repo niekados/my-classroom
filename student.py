@@ -59,7 +59,7 @@ class Student:
         worksheet_len = len(class_name.col_values(2)) + 1
         # Update cells with student information
         class_name.update_cell(worksheet_len, 1, f"{int(Student.sid.acell('A1').value) + 1}")
-        class_name.update_cell(worksheet_len, 2, self.name.capitalize())
+        class_name.update_cell(worksheet_len, 2, self.name.title())
         class_name.update_cell(worksheet_len, 3, self.allergies.capitalize())
         class_name.update_cell(worksheet_len, 4, self.dietary.capitalize())
         class_name.update_cell(worksheet_len, 5, self.medication.capitalize())
