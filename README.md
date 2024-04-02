@@ -170,3 +170,6 @@ I wondered about the tools available to teachers for sharingthis important infor
 
 1. Credits to [Sore Shark](https://www.grepper.com/profile/sore-shark-2960dft2pjr8) for their solution on clearing the console window for Windows, Unix, and Linux.  
    [Link to solution](https://www.grepper.com/answers/393350/python+clear+screen+windows+and+linux)
+
+2. Thanks to [Umberto Grando](https://medium.com/@inzaniak?source=post_page-----6747d68d71a6--------------------------------) for his informative article on creating and displaying tables in the Python terminal.  
+   [Create Tables in your Terminal with Python](https://medium.com/@inzaniak/create-tables-in-your-terminal-with-python-6747d68d71a6)
