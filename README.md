@@ -27,7 +27,7 @@ I wondered about the tools available to teachers for sharingthis important infor
 
 ## Flowchart
 
-![Flowchart](/assets/flowchart/Flowcharts.png)
+![Flowchart](/assets/images/flowchart/flowchart.png)
 
 ## Design
 
@@ -42,6 +42,30 @@ Despite its simplicity, the interface effectively fulfills its purpose. It provi
 ## Features
 
 ## Data Model
+
+Google Sheets was chosen as the data storage method for this project, integrated through Google Cloud API services.
+
+The Google Sheet is divided into multiple worksheets, with each worksheet representing a classroom. For example, worksheets may be titled "2A", "2B", "2C", etc., where each represents a distinct classroom.
+
+![Worksheets](/assets/images/data-model/worksheets.png)
+
+Additionally, there is an extra worksheet called "sid" (abbreviation for student ID), which is not associated with any specific classroom. This worksheet serves the sole purpose of tracking student IDs, with each new student created incrementing the student ID count by one. This ensures that the student ID tracker remains intact even in the event of system malfunctions.
+
+![Student Id counter](/assets/images/data-model/student-id-counter.png)
+
+The structure of each classroom worksheet includes the following columns:
+
+- Student ID
+- Name
+- Allergies
+- Dietary Requirements
+- Medication
+- Special Needs
+- Notes
+
+This structured allows for organized and efficient management of student information, ensuring that important details are easily accessible and properly tracked for each student. 
+
+![Table Structure](/assets/images/data-model/table-structure.png)
 
 ## Setting Up Google API
 
@@ -174,8 +198,6 @@ Despite its simplicity, the interface effectively fulfills its purpose. It provi
 
 - [rich.table](https://rich.readthedocs.io/en/stable/introduction.html): A Python library for creating and displaying tables with rich text formatting in the terminal. 
 
-## Testing 
-
 ## Credits
 
 1. Credits to [Sore Shark](https://www.grepper.com/profile/sore-shark-2960dft2pjr8) for their solution on clearing the console window for Windows, Unix, and Linux.  
@@ -183,3 +205,5 @@ Despite its simplicity, the interface effectively fulfills its purpose. It provi
 
 2. Thanks to [Umberto Grando](https://medium.com/@inzaniak?source=post_page-----6747d68d71a6--------------------------------) for his informative article on creating and displaying tables in the Python terminal.  
    [Create Tables in your Terminal with Python](https://medium.com/@inzaniak/create-tables-in-your-terminal-with-python-6747d68d71a6)
+
+## Testing 
