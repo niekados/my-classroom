@@ -31,6 +31,14 @@ I wondered about the tools available to teachers for sharingthis important infor
 
 ## Design
 
+The design of the terminal interface for this project is intentionally kept minimalistic and raw, in line with the simplicity of a command-line interface. The focus is on functionality and usability rather than aesthetic appeal.
+
+The interface primarily consists of plain text, with the exception of tables used to represent classroom data. These tables are drawn dynamically to provide a structured view of the classroom information.
+
+To maintain clarity and simplicity, no colors or styling elements have been added to the interface. This decision was made to ensure that the interface remains accessible and easy to navigate for users who may be unfamiliar with more complex graphical interfaces.
+
+Despite its simplicity, the interface effectively fulfills its purpose. It provides users with a straightforward menu system that allows them to easily access the necessary functionalities of the application. 
+
 ## Features
 
 ## Data Model
