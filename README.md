@@ -132,6 +132,23 @@ I wondered about the tools available to teachers for sharingthis important infor
 
 ## Technologies Used
 
+- [Project template](https://github.com/Code-Institute-Org/p3-template) provided by Code Institute consisting of:
+    - HTML
+    - JavaScript
+
+- [Python](https://www.python.org/): Main language used to build the application.
+
+- [GitHub](https://github.com/): Used for pushing and storing application code.
+
+- [GitPod](https://www.gitpod.io/): Cloud development environment used to develop the application.
+
+- [Google Cloud](https://cloud.google.com/): Used API feature to connect Google Sheets with the application.
+
+- [Google Sheets](https://www.google.com/sheets/about/): Used to store and manipulate application data.
+
+- [Heroku](https://www.heroku.com): Used to deploy the application.
+
+- [Lucidchart](https://www.lucidchart.com/pages/): Used to create flowchart for the project.
 
 ## Python Libraries
 

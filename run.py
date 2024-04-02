@@ -658,7 +658,6 @@ def main():
 
     The main menu allows the user to navigate to different sections of the program, including Classroom, Kitchen, Medical, and Admin.
     """
-    clear_console()
     while True:
         # Display the main menu options
         menu_title = "Main Menu"
