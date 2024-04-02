@@ -158,7 +158,7 @@ def filter_all_worksheets(*args, check_empty_med_cells=False):
     
     # Iterate over each worksheet
     for worksheet in all_worksheets:
-        # Exclude special worksheet named 'sid'
+        # Exclude worksheet named 'sid'
         if worksheet.title != "sid":
             # Get the worksheet name
             worksheet_name = worksheet.title

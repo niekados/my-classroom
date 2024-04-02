@@ -27,7 +27,9 @@ I wondered about the tools available to teachers for sharingthis important infor
 
 ## Flowchart
 
-## How To Use MyClassroom 
+![Flowchart](/assets/flowchart/Flowcharts.png)
+
+## Design
 
 ## Features
 
