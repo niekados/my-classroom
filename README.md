@@ -45,6 +45,8 @@ Despite its simplicity, the interface effectively fulfills its purpose. It provi
 
 Google Sheets was chosen as the data storage method for this project, integrated through Google Cloud API services.
 
+- **[This link will take you to Google Spreadsheet used for this project](https://docs.google.com/spreadsheets/d/1569A0UBfqTsWflyTsJghV21NA02UaznB9tdeAba-fno/edit?usp=sharing)**
+
 The Google Sheet is divided into multiple worksheets, with each worksheet representing a classroom. For example, worksheets may be titled "2A", "2B", "2C", etc., where each represents a distinct classroom.
 
 ![Worksheets](/assets/images/data-model/worksheets.png)
