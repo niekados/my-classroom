@@ -131,6 +131,10 @@ def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
                 # Add the row to the table
                 table.add_row(*row_values, end_section=True)
 
+        # If table rows are empty, add 'No Data' 
+        if len(table.rows) == 0:
+            table.add_row("No Data", end_section=True)
+
         return table
 
     except gspread.exceptions.WorksheetNotFound as e:
