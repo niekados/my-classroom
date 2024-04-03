@@ -2,17 +2,17 @@
 
 ## Introduction
 
-MyClassroom is a command line interface application running in Python terminal. A classroom management tool born from an understanding of the diverse needs of students and the challenges faced by teachers in addressing them. MyClassroom aims to simplify the complex task of classroom management while ensuring that every child receives the care and attention they deserve. 
+MyClassroom is a command-line interface application running in a Python terminal. A classroom management tool born from an understanding of the diverse needs of students and the challenges faced by teachers in addressing them. MyClassroom aims to simplify the complex task of classroom management while ensuring that every child receives the care and attention they deserve. 
 
-With MyClassroom, teachers gain access to a simple overview of their classrooms, allowing them to track students' medical or dietary needs, preferences, and behaviors effortlessly. From dietary restrictions to social anxieties, MyClassroom empowers teachers to provide personalized support, fostering an inclusive and nurturing learning environment for all.
+With MyClassroom, teachers gain access to a simple overview of their classrooms, allowing them to track students' medical or dietary needs, preferences, and behaviours effortlessly. From dietary restrictions to social anxieties, MyClassroom empowers teachers to provide personalized support, fostering an inclusive and nurturing learning environment for all.
 
 ## Project Inception
 
-In the heart of every classroom lies a world of diversity, where each child brings their unique needs, fears, and joys. And it happens that we are lucky to have one joyful little person, who sometimes needs a little extra attention and care. I've often wondered at the incredible dedication of teachers who tirelessly work ensuring that every child feels safe, understood, and valued.
+In the heart of every classroom lies a world of diversity, where each child brings their unique needs, fears, and joys. And it happens that we are lucky to have one joyful little person, who sometimes needs a little extra attention and care. I've often wondered at the incredible dedication of teachers who tirelessly work to ensure that every child feels safe, understood, and valued.
 
-Little joyfuls persons journey sparked my curiosity about the complexities teachers face in managing classrooms. How do they remember each child's special instructions, fears, and preferences amidst the whirlwind of daily activities? How do they maintain a nurturing environment while juggling diverse needs and personalities?
+Little Joyful Person's journey sparked my curiosity about the complexities teachers face in managing classrooms. How do they remember each child's special instructions, fears, and preferences amidst the whirlwind of daily activities? How do they maintain a nurturing environment while juggling diverse needs and personalities?
 
-I wondered about the tools available to teachers for sharingthis important information across departments, and the strategies for seamlessly transitioning responsibilities when a teacher is absent. These reflections ignited the idea for MyClassroom – a simple software solution aimed at supporting teachers and enhancing the educational experience for every child. MyClassroom is a commitment to ensuring that every child receives the care and attention they deserve. With MyClassroom, teachers can effortlessly access a comprehensive overview of their classrooms, allowing them to track students' needs, preferences, and behaviors with ease. From dietary restrictions to social anxieties, MyClassroom empowers teachers to provide personalized support, creating an inclusive learning environment for all.
+I wondered about the tools available to teachers for sharing this important information across departments and the strategies for seamlessly transitioning responsibilities when a teacher is absent. These reflections ignited the idea for MyClassroom – a simple software solution aimed at supporting teachers and enhancing the educational experience for every child. MyClassroom is a commitment to ensuring that every child receives the care and attention they deserve. With MyClassroom, teachers can effortlessly access a comprehensive overview of their classrooms, allowing them to track students' needs, preferences, and behaviours with ease. From dietary restrictions to social anxieties, MyClassroom empowers teachers to provide personalized support, creating an inclusive learning environment for all.
 
 ## User Stories
 
@@ -35,9 +35,9 @@ The design of the terminal interface for this project is intentionally kept mini
 
 The interface primarily consists of plain text, with the exception of tables used to represent classroom data. These tables are drawn dynamically to provide a structured view of the classroom information.
 
-To maintain clarity and simplicity, no colors or styling elements have been added to the interface. This decision was made to ensure that the interface remains accessible and easy to navigate for users who may be unfamiliar with more complex graphical interfaces.
+To maintain clarity and simplicity, no colours or styling elements have been added to the interface. This decision was made to ensure that the interface remains accessible and easy to navigate for users who may be unfamiliar with more complex graphical interfaces.
 
-Despite its simplicity, the interface effectively fulfills its purpose. It provides users with a straightforward menu system that allows them to easily access the necessary functionalities of the application. 
+Despite its simplicity, the interface effectively fulfils its purpose. It provides users with a straightforward menu system that allows them to easily access the necessary functionalities of the application. 
 
 ## Features
 
@@ -47,7 +47,7 @@ Despite its simplicity, the interface effectively fulfills its purpose. It provi
 
 - Displays MyClassroom logo.
 - Utilizes a command line interface for menu navigation.
-- Features 4 main menu branches: "Classroom", "Kitchen", "Medical", and "Admin", each leading to submenus.
+- Features 4 main menu branches: "Classroom", "Kitchen", "Medical", and "Admin", each leading to a submenus.
 - Includes a "Quit" option, simulating program exit.
 
 ### Classroom Menu
@@ -58,8 +58,8 @@ Despite its simplicity, the interface effectively fulfills its purpose. It provi
 
 - Submenu within the main menu.
 - Options:
-    - Display full worksheet for chosen classroom.
-    - Display only students with medical assistance requirements for chosen classroom.
+    - Display the full worksheet for a chosen classroom.
+    - Display only students with medical assistance requirements for a chosen classroom.
 - Option to return to the main menu.
 
 ### Kitchen Menu
@@ -79,7 +79,7 @@ Despite its simplicity, the interface effectively fulfills its purpose. It provi
     - **Dietary Requirements:** Displays all students in the school with any dietary restrictions.
     - **Medications:** Shows students in the school who are currently taking or require medications.
     - **Special Needs:** Provides information on students with any special needs.
-    - **Medical or Behavioral Notes:** Displays any medical or behavioral notes for students.
+    - **Medical or Behavioural Notes:** Displays any medical or behavioural notes for students.
     - **All Students:** Displays a table with all students in the school and their respective information.
 
 ### Admin Menu
@@ -153,7 +153,7 @@ The structure of each classroom worksheet includes the following columns:
 - Special Needs
 - Notes
 
-This structured allows for organized and efficient management of student information, ensuring that important details are easily accessible and properly tracked for each student. 
+This structure allows for organized and efficient management of student information, ensuring that important details are easily accessible and properly tracked for each student. 
 
 ![Table Structure](/assets/images/data-model/table-structure.png)
 
@@ -162,7 +162,7 @@ This structured allows for organized and efficient management of student informa
 1. Login to [Google Cloud Platform](https://cloud.google.com/)
 2. Click the drop-down menu next to the "Google Cloud" logo (it may display the name of another project you are currently working on) and select "NEW PROJECT" to create a new project.
 3. Enter the name of your project in the provided field on the new screen, then click "Create" to proceed.
-4. After creating your project, return to the main page of Google Cloud Platform. Select the project you just created from the drop-down menu next to the "Google Cloud" logo.
+4. After creating your project, return to the main page of the Google Cloud Platform. Select the project you just created from the drop-down menu next to the "Google Cloud" logo.
 5. In the "Quick Access" menu, click on "APIs & Services".
 6. In the new window, select the "Libraries" option from the menu on the left side of your screen.
 7. In the "API library" window, use the search bar to find "Google Drive API".
@@ -240,7 +240,7 @@ This structured allows for organized and efficient management of student informa
 5. In your app's dashboard, go to the settings tab and locate the "Config Vars" section.
 6. Click the "Reveal Config Vars" button.
 7. In the "KEY" field, enter "CREDS".
-8. Go back to your workspace, copy the entire content of the "creds.json" file.
+8. Go back to your workspace, and copy the entire content of the "creds.json" file.
 9. Return to the Heroku "Config Vars" section, paste the content of "creds.json" into the "VALUE" field, and click the "Add" button.
 10. In the "Config Vars" section, add an additional "KEY"  ```PORT``` with the value of ```8000``` and press the "Add" button.
 11. Now scroll down to the "Buildpacks" section and click the "Add buildpack" button.
@@ -272,7 +272,7 @@ This structured allows for organized and efficient management of student informa
 
 - [Heroku](https://www.heroku.com): Used to deploy the application.
 
-- [Lucidchart](https://www.lucidchart.com/pages/): Used to create flowchart for the project.
+- [Lucidchart](https://www.lucidchart.com/pages/): Used to create a flowchart for the project.
 
 ## Python Libraries
 
@@ -280,18 +280,18 @@ This structured allows for organized and efficient management of student informa
 
 - [google.oauth2.service_account](https://google-auth.readthedocs.io/en/master/reference/google.oauth2.service_account.html): A Python library for authenticating using a service account with Google APIs.
 
-- [os](https://docs.python.org/3/library/os.html): A Python library providing a portable way of using operating system dependent functionality. Utilized for clearing the terminal during menu migration to new screens.
+- [os](https://docs.python.org/3/library/os.html): A Python library providing a portable way of using operating system-dependent functionality. Utilized for clearing the terminal during menu migration to new screens.
 
 - [re](https://docs.python.org/3/library/re.html): A Python library providing support for regular expressions (RE). Used for user input validation.
 
-- [rich.console](https://rich.readthedocs.io/en/stable/introduction.html): A Python library for adding color and style to terminal text output. Used to print rich.table.
+- [rich.console](https://rich.readthedocs.io/en/stable/introduction.html): A Python library for adding colour and style to terminal text output. Used to print rich table.
 
 - [rich.table](https://rich.readthedocs.io/en/stable/introduction.html): A Python library for creating and displaying tables with rich text formatting in the terminal. 
 
 ## Credits
 
-1. Credits to [Sore Shark](https://www.grepper.com/profile/sore-shark-2960dft2pjr8) for their solution on clearing the console window for Windows, Unix, and Linux.  
-   [Link to solution](https://www.grepper.com/answers/393350/python+clear+screen+windows+and+linux)
+1. Credits to [Sore Shark](https://www.grepper.com/profile/sore-shark-2960dft2pjr8) for their solution of clearing the console window for Windows, Unix, and Linux.  
+   [Link to a solution](https://www.grepper.com/answers/393350/python+clear+screen+windows+and+linux)
 
 2. Thanks to [Umberto Grando](https://medium.com/@inzaniak?source=post_page-----6747d68d71a6--------------------------------) for his informative article on creating and displaying tables in the Python terminal.  
    [Create Tables in your Terminal with Python](https://medium.com/@inzaniak/create-tables-in-your-terminal-with-python-6747d68d71a6)
