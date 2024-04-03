@@ -41,6 +41,94 @@ Despite its simplicity, the interface effectively fulfills its purpose. It provi
 
 ## Features
 
+### Main Menu
+
+<img src="assets/images/features/main-menu.png" alt="main menu" style="width:60%;">
+
+- Displays MyClassroom logo.
+- Utilizes a command line interface for menu navigation.
+- Features 4 main menu branches: "Classroom", "Kitchen", "Medical", and "Admin", each leading to submenus.
+- Includes a "Quit" option, simulating program exit.
+
+### Classroom Menu
+
+<img src="assets/images/features/classroom-menu.png" alt="classroom menu" style="width:60%;">
+
+<img src="assets/images/features/select-classroom.png" alt="select classroom" style="width:60%;">
+
+- Submenu within the main menu.
+- Options:
+    - Display full worksheet for chosen classroom.
+    - Display only students with medical assistance requirements for chosen classroom.
+- Option to return to the main menu.
+
+### Kitchen Menu
+
+<img src="assets/images/features/kitchen-menu.png" alt="kitchen menu" style="width:60%;">
+
+- Displays students with allergies or dietary requirements for meal preparation.
+- Excludes students without any requirements from the displayed table.
+- Option to return to the main menu.
+
+### Medical Menu
+
+<img src="assets/images/features/medical-menu.png" alt="medical menu" style="width:60%;">
+
+- Offers multiple filtering options, each displaying a table for each classroom:
+    - **Allergies:** Lists all students in the school with any allergies.
+    - **Dietary Requirements:** Displays all students in the school with any dietary restrictions.
+    - **Medications:** Shows students in the school who are currently taking or require medications.
+    - **Special Needs:** Provides information on students with any special needs.
+    - **Medical or Behavioral Notes:** Displays any medical or behavioral notes for students.
+    - **All Students:** Displays a table with all students in the school and their respective information.
+
+### Admin Menu
+
+<img src="assets/images/features/admin-menu.png" alt="admin menu" style="width:60%;">
+
+- Provides administrative functionalities:
+
+    - **Add Student:**
+
+        <img src="assets/images/features/add-new-student.png" alt="add student" style="width:60%;">
+
+        - Guided menu for entering new student details, including:
+            - Name and surname (Minimum 3 alphabetical letters, may include a space followed by another name)
+            - Medical requirements (Option to indicate if the student has any medical needs)
+            - Detailed medical information if applicable (Allergies, Dietary Requirements, Medications, Special Needs, Notes)
+    - **Remove Student:**
+
+        <img src="assets/images/features/remove-student.png" alt="remove student" style="width:60%;">
+
+        - Search for a student by name and remove if found.
+    - **Add Classroom:**
+
+        <img src="assets/images/features/add-classroom.png" alt="add classroom" style="width:60%;">
+
+        - Creation of a new classroom with a combination of school year (1 to 12) and classroom letter.
+    - **Remove Classroom:**
+
+        <img src="assets/images/features/remove-classroom.png" alt="remove classroom" style="width:60%;">
+
+        - Select an existing classroom to remove.
+
+### Future Features
+
+- **Birthday Tracker:**
+    - Ability to track upcoming birthdays, allowing teachers to prepare and celebrate with students.
+- **Automatic Classroom Naming:**
+    - Incrementation of classroom names by year at the start of a new school year.
+- **User Authentication and Logging:**
+    - Different access levels for teachers and departments, with logging capabilities.
+- **Daily Activity Tracking:**
+    - Option to record daily activities or individual child's progress for better monitoring.
+- **Exportable Worksheets:**
+    - Ability to export worksheets in report format for sharing with parents or during teacher meetings.
+- **Additional Data Fields:**
+    - Implementation of more data fields such as diary entries and absences.
+- **National Database Integration:**
+    - Integration of a national database to facilitate seamless transition of student data between schools, reducing adaptability challenges for students and parents.
+
 ## Data Model
 
 Google Sheets was chosen as the data storage method for this project, integrated through Google Cloud API services.
