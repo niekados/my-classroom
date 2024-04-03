@@ -177,6 +177,8 @@ def filter_all_worksheets(*args, check_empty_med_cells=False):
             if table is not None:
                 # Print the table
                 console.print(table)
+                input("\nPress Enter to continue...")
+                clear_console()
             else:
                 # Print error message if table retrieval failed
                 print("An error occurred while filtering worksheet.")
