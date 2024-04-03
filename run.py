@@ -295,6 +295,7 @@ def add_new_student_menu():
     while True:
         print(f"\nNew Student: {student_full_name}")
         has_medical_conditions = input("Does the student have any medical conditions? (y/n): \n").strip().lower()
+        clear_console() 
 
         if has_medical_conditions == 'y':
             allergies = input("Enter allergies (Press enter to skip): \n").strip()
