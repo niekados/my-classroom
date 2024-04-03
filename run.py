@@ -403,48 +403,50 @@ def remove_student():
     students_found_menu = []
     student_worksheet_location = []
     print_menu_title("Remove Student")
-    print("To cancel and return to Main Menu, press 'Q'.\n")
     
     # Get the student's name to be removed
     search_keyword = get_valid_string_input("Enter the student's name to remove: \n")
-    
-    # Check if the user wants to cancel
-    if search_keyword.lower() == "q":
-        return
-    else:
-        try:
-            all_worksheets = SHEET.worksheets()
-            for worksheet in all_worksheets:
-                # Search for the student's name in each worksheet
-                for cell in worksheet.findall(search_keyword, in_column=2, case_sensitive=False):
-                    classroom_name = worksheet.title
-                    search_keyword_row = cell.row
-                    student_name = SHEET.worksheet(classroom_name).cell(search_keyword_row, 2).value
-                    student_id = SHEET.worksheet(classroom_name).cell(search_keyword_row,1).value
-                    # Add the student's data to the menu if not already added
-                    if f"{student_name} in classroom {classroom_name}" not in students_found_menu:
-                        students_found_menu.append(f"Id: {student_id}, Name: {student_name}, Classroom: {classroom_name}")
-                        student_worksheet_location.append([classroom_name, search_keyword_row])
 
-            # If students are found, display them in a menu
-            if students_found_menu != []:        
-                show_menu(students_found_menu, menu_title)
-                choice = get_valid_choice(students_found_menu)
-                if choice == len(students_found_menu) + 1:
-                    return  # Quit
-                else:
+    try:
+        all_worksheets = SHEET.worksheets()
+        for worksheet in all_worksheets:
+            # Search for the student's name in each worksheet
+            for cell in worksheet.findall(search_keyword, in_column=2, case_sensitive=False):
+                classroom_name = worksheet.title
+                search_keyword_row = cell.row
+                student_name = SHEET.worksheet(classroom_name).cell(search_keyword_row, 2).value
+                student_id = SHEET.worksheet(classroom_name).cell(search_keyword_row,1).value
+                # Add the student's data to the menu if not already added
+                if f"{student_name} in classroom {classroom_name}" not in students_found_menu:
+                    students_found_menu.append(f"Id: {student_id}, Name: {student_name}, Classroom: {classroom_name}")
+                    student_worksheet_location.append([classroom_name, search_keyword_row])
+
+        # If students are found, display them in a menu
+        if students_found_menu != []:        
+            show_menu(students_found_menu, menu_title)
+            choice = get_valid_choice(students_found_menu)
+            if choice == len(students_found_menu) + 1:
+                return  # Quit
+            else:
+                print(f"Are you sure you want to remove student {students_found_menu[choice -1]}?")
+                confirm_delete = input('Type "yes" to confirm or press any key to return to the main menu.\n').strip().lower()
+                if confirm_delete == "yes":
                     # Delete the selected student from the worksheet
                     Student.delete_student(student_worksheet_location[choice - 1][0], student_worksheet_location[choice - 1][1])
-                    print(f"Student {students_found_menu[choice -1]} removed.")
-            else:
-                # Notify if the student is not found in any classroom
-                print(f"Student {search_keyword} not found in any classroom.")
-        except Exception as e:
-            # Print error message if an error occurs
-            print(f"An error occurred while removing student: {e}")
-        
-        # Prompt the user to return to the main menu
-        press_enter_to_continue()
+                    print(f"The student {students_found_menu[choice -1]} successfully deleted.")
+                else:
+                    print(f"Deletion of student {students_found_menu[choice-1]} cancelled.")
+                    press_enter_to_continue()
+                    return
+        else:
+            # Notify if the student is not found in any classroom
+            print(f"Student {search_keyword} not found in any classroom.")
+    except Exception as e:
+        # Print error message if an error occurs
+        print(f"An error occurred while removing student: {e}")
+    
+    # Prompt the user to return to the main menu
+    press_enter_to_continue()
 
 def remove_classroom():
     """
