@@ -669,8 +669,10 @@ def main():
         
         # Perform actions based on user's choice
         if choice == len(main_options) + 1:
+            # Clear the console and pretend to exit the program
+            clear_console()
             print("Goodbye!")
-            break  # Quit
+            press_enter_to_continue() 
         elif choice == 1:
             classroom_menu()  # Navigate to Classroom menu
         elif choice == 2:
