@@ -473,22 +473,30 @@ def remove_classroom():
     # Check if the user chose to cancel
     if choice == len(classroom_menu) + 1:
         return
-    else: 
-        try:
-            # Get the worksheet to be deleted
-            worksheet_to_delete = SHEET.worksheet(classroom_menu[choice - 1])
+    else:
+        # Confirm classroom deletion
+        print(f"Are you sure you want to remove classroom {classroom_menu[choice - 1]} ?")
+        confirm_delete = input('Type "yes" to confirm or any key to return to the main menu.\n').strip().lower()
+
+        if confirm_delete == "yes":
+            try:
+                # Get the worksheet to be deleted
+                worksheet_to_delete = SHEET.worksheet(classroom_menu[choice - 1])
+                
+                # Delete the selected worksheet
+                SHEET.del_worksheet(worksheet_to_delete)
+                
+                # Notify the user about the successful removal
+                print(f"Classroom {classroom_menu[choice - 1]} successfully removed.")
+            except Exception as e:
+                # Print error message if worksheet deletion fails
+                print(f"An error occurred while removing classroom: {e}")
             
-            # Delete the selected worksheet
-            SHEET.del_worksheet(worksheet_to_delete)
-            
-            # Notify the user about the successful removal
-            print(f"Classroom {classroom_menu[choice - 1]} successfully removed.")
-        except Exception as e:
-            # Print error message if worksheet deletion fails
-            print(f"An error occurred while removing classroom: {e}")
-        
-        # Prompt the user to return to the main menu
-        press_enter_to_continue()
+            # Prompt the user to return to the main menu
+            press_enter_to_continue()
+        else:
+            print(f"Deletion of classroom {classroom_menu[choice-1]} cancelled.")
+            press_enter_to_continue()
 
 
 def select_classroom(check_empty_med_cells=False):
