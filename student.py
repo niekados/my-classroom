@@ -1,3 +1,7 @@
+"""
+This module provides functionality for managing student information in MyClassroom.
+"""
+
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -15,6 +19,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 
 # Opening the Google Sheets document named 'my_classroom'
 SHEET = GSPREAD_CLIENT.open('my_classroom')
+
 
 class Student:
     """

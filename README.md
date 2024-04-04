@@ -1,5 +1,29 @@
 # MyClassroom: Empowering Teachers, Supporting Every Child
 
+## Index
+
+- [Introduction](#introduction)
+- [Project Inception](#project-inception)
+- [User Stories](#user-stories)
+- [Flowchart](#flowchart)
+- [Design](#design)
+- [Features](#features)
+    - [Main Menu](#main-menu)
+    - [Classroom Menu](#classroom-menu)
+    - [Kitchen Menu](#kitchen-menu)
+    - [Medical Menu](#medical-menu)
+    - [Admin Menu](#admin-menu)
+- [Future Features](#future-features)
+- [Data Model](#data-model)
+- [Setting Up Google API](#setting-up-google-api)
+- [Setting Up the Development Environment](#setting-up-the-development-environment)
+- [Connecting to API with Python](#connecting-to-api-with-python)
+- [Deploying Project to Heroku](#deploying-project-to-heroku)
+- [Technologies Used](#technologies-used)
+- [Python Libraries](#python-libraries)
+- [Credits](#credits)
+- [Testing](#testing)
+
 ## Introduction
 
 MyClassroom is a command-line interface application running in a Python terminal. A classroom management tool born from an understanding of the diverse needs of students and the challenges faced by teachers in addressing them. MyClassroom aims to simplify the complex task of classroom management while ensuring that every child receives the care and attention they deserve. 
@@ -297,3 +321,5 @@ This structure allows for organized and efficient management of student informat
    [Create Tables in your Terminal with Python](https://medium.com/@inzaniak/create-tables-in-your-terminal-with-python-6747d68d71a6)
 
 ## Testing 
+
+[Please follow this link for TESTING.md](TESTING.md)
