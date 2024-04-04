@@ -4,6 +4,16 @@ This project was built using [Code Institute Project Template](https://github.co
 
 ## PEP8 Validation
 
+The `run.py` and `student.py` files have been reformatted to adhere to PEP8 standards and validated using [CI Python Linter](https://pep8ci.herokuapp.com/).
+
+- **run.py** validation results:
+
+  <img src="assets/images/python-linter/run.png" alt="'run' validation" style="width:60%;">
+
+- **student.py** validation results:
+
+  <img src="assets/images/python-linter/student.png" alt="'student' validation" style="width:60%;">
+
 ## Manual Testing
 
 ## Testing User Stories

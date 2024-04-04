@@ -25,7 +25,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 
 # Opening the Google Sheets document named 'my_classroom'
-SHEET = GSPREAD_CLIENT.open("class_TEST")
+SHEET = GSPREAD_CLIENT.open("my_classroom")
 
 console = Console()
 
