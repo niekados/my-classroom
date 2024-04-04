@@ -1,75 +1,85 @@
-import gspread
-from google.oauth2.service_account import Credentials
-import os
-import re
-from rich.console import Console
-from rich.table import Table
-from student import Student
+# Standard library imports
+import os  # Operating system specific functionality
+import re  # Regular expression operations
+
+# Third-party imports
+import gspread  # Google Sheets API library
+from google.oauth2.service_account import Credentials  # Google credentials
+from rich.console import Console  # Rich library for printing rich table
+from rich.table import Table  # Rich library for creating tables
+
+# Local application
+from student import Student  # Importing Student class from local module
+
 
 # Google Sheets authentication
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
+    "https://www.googleapis.com/auth/drive",
 ]
 
 # Loading credentials from the JSON file
-CREDS = Credentials.from_service_account_file('creds.json')
+CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 
 # Opening the Google Sheets document named 'my_classroom'
-SHEET = GSPREAD_CLIENT.open('my_classroom')
+SHEET = GSPREAD_CLIENT.open("class_TEST")
 
 console = Console()
 
-# Credits to Sore Shark(https://www.grepper.com/profile/sore-shark-2960dft2pjr8) 
-# For his solution on how to clear console for Windows, Unix and Linux 
-# https://www.grepper.com/answers/393350/python+clear+screen+windows+and+linux
+
+'''Credits to Sore Shark
+    (https://www.grepper.com/profile/sore-shark-2960dft2pjr8)
+For his solution on how to clear console for Windows, Unix and Linux
+    https://www.grepper.com/answers/393350/python+clear+screen+windows+and+linux
+Used in clear_console() function.
+'''
+
+
 def clear_console():
-    """
-    Clears the terminal screen.
-    """
-    os.system('cls' if os.name in ('nt', 'dos') else 'clear') 
+    """Clears the terminal screen."""
+    os.system("cls" if os.name in ("nt", "dos") else "clear")
+
 
 def my_class_logo():
-    """
-    Prints the MyClassroom logo to the console.
-    """
+    """Prints the MyClassroom logo to the console."""
     my_class_logo_table = Table(show_header=False)
-    my_class_logo_table.add_row('*** Welcome to MyClassroom ***')  
-    my_class_logo_table.add_row(' Copyright - Vilmantas - 2024')
-    
+    my_class_logo_table.add_row("*** Welcome to MyClassroom ***")
+    my_class_logo_table.add_row(" Copyright - Vilmantas - 2024")
+
     # Attempt to print the logo with console.print
     try:
         console.print(my_class_logo_table)
     # If an error occurs, print the logo with regular print
-    except:
-        print('*** Welcome to MyClassroom ***')  
-        print(' Copyright - Vilmantas - 2024')  
+    except Exception as e:
+        print("*** Welcome to MyClassroom ***")
+        print(" Copyright - Vilmantas - 2024")
+        print(f"Error occurred while printing the logo: {e}")
+
 
 def mini_logo():
-    """
-    Prints small MyClassroom logo to the console.
-    """
+    """Prints small MyClassroom logo to the console."""
     mini_logo_table = Table(show_header=False)
-    mini_logo_table.add_row('*** MyClassroom ***')  
+    mini_logo_table.add_row("*** MyClassroom ***")
 
     # Attempt to print the logo with console.print
     try:
         console.print(mini_logo_table)
     # If an error occurs, print the logo with regular print
-    except:
-        print('*** MyClassroom ***')
+    except Exception as e:
+        print("*** MyClassroom ***")
+        print(f"Error occurred while printing the logo: {e}")
+
 
 def print_menu_title(menu_title):
-    """
-    Prints the menu title to the console.
-    """
+    """Prints the menu title to the console."""
     print("-" * (len(menu_title) + 6))
     print(f"|* {menu_title} *|")
     print("-" * (len(menu_title) + 6))
     print()
+
 
 def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
     """
@@ -78,10 +88,17 @@ def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
     Args:
         *args: Variable length list of column headers to include in the table.
         class_name (str, optional): The name of the class worksheet to filter.
-        check_empty_med_cells (bool, optional): Check for empty medical cells(Allergies, Dietary, Medication, Special Needs). Defaults to False.
+        check_empty_med_cells (bool, optional): Check for empty medical cells
+            (Allergies, Dietary, Medication, Special Needs). Defaults to False.
 
     Returns:
         Table object containing the filtered data.
+
+Raises:
+        gspread.exceptions.WorksheetNotFound:
+            If the specified worksheet is not found.
+        gspread.exceptions.APIError:
+            If an error occurs while accessing Google Sheets API.
     """
     try:
         # Get the class worksheet
@@ -131,7 +148,7 @@ def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
                 # Add the row to the table
                 table.add_row(*row_values, end_section=True)
 
-        # If table rows are empty, add 'No Data' 
+        # If table rows are empty, add 'No Data'
         if len(table.rows) == 0:
             table.add_row("No Data", end_section=True)
 
@@ -146,33 +163,40 @@ def filter_worksheet(*args, class_name: str, check_empty_med_cells=False):
         press_enter_to_continue()
         return None
 
+
 def filter_all_worksheets(*args, check_empty_med_cells=False):
     """
     Filters all worksheets based on the provided column headers.
 
     Args:
         *args: Variable length list of column headers to include in the table.
-        check_empty_med_cells (bool, optional): Check for empty medical cells (Allergies, Dietary, Medication, Special Needs). Defaults to False.
+        check_empty_med_cells (bool, optional): Check for empty medical cells
+            (Allergies, Dietary, Medication, Special Needs). Defaults to False.
 
     Raises:
-        gspread.exceptions.APIError: If there is an error accessing the Google Sheets API.
+        gspread.exceptions.APIError:
+            If there is an error accessing the Google Sheets API.
     """
     # Get all worksheets
     all_worksheets = SHEET.worksheets()
-    
+
     # Iterate over each worksheet
     for worksheet in all_worksheets:
         # Exclude worksheet named 'sid'
         if worksheet.title != "sid":
             # Get the worksheet name
             worksheet_name = worksheet.title
-            
+
             # Print menu title
             print_menu_title(f"Class: {worksheet_name}")
-            
+
             # Call filter_worksheet to filter the current worksheet
-            table = filter_worksheet(*args, class_name=worksheet_name, check_empty_med_cells=check_empty_med_cells)
-            
+            table = filter_worksheet(
+                *args,
+                class_name=worksheet_name,
+                check_empty_med_cells=check_empty_med_cells,
+            )
+
             # Check if table is successfully retrieved
             if table is not None:
                 # Print the table
@@ -183,11 +207,11 @@ def filter_all_worksheets(*args, check_empty_med_cells=False):
                 # Print error message if table retrieval failed
                 print("An error occurred while filtering worksheet.")
 
+
 def press_enter_to_continue():
-    """
-    Prompts the user to press Enter to return to the main menu.
-    """
+    """Prompts the user to press enter to continue."""
     input("\nPress Enter to return to the main menu...\n")
+
 
 def show_menu(menu_options, menu_title):
     """
@@ -213,7 +237,6 @@ def show_menu(menu_options, menu_title):
     for option in menu_options:
         print(f"{menu_options.index(option) + 1}. {option}")
 
-    # Print the quit option if it's the main menu, otherwise print the option to return to the main menu
     if menu_title == "Main Menu":
         print(f"{len(menu_options) + 1}. Quit\n")
     else:
@@ -235,50 +258,59 @@ def get_valid_choice(menu_options):
             # Prompt the user to enter a choice
             print(f"Type a number between 1 and {len(menu_options) + 1}.")
             choice = int(input("Enter your choice: \n"))
-            
+
             # Check if the choice is within the valid range
             if 1 <= choice <= len(menu_options) + 1:
                 return choice
             else:
                 # Print error message for invalid choice
-                print(f"Invalid choice. Please enter a number between 1 and {len(menu_options) + 1}.")
-        
+                print(
+                    f"Invalid choice. Please enter "
+                    f"a number between 1 and {len(menu_options) + 1}."
+                )
+
         except ValueError:
             # Print error message for invalid input (non-integer)
             print("Invalid input. Please enter a number.")
 
+
 def get_valid_string_input(prompt):
     """
-    Get a valid string input from the user consisting only of alphabetical characters or spaces.
-    
+    Get a valid string input from the user
+        consisting only of alphabetical characters or spaces.
+
     Args:
         prompt (str): The prompt message to display to the user.
 
     Returns:
-        str: A valid string input consisting only of alphabetical characters or spaces.
+        str: A valid string input consisting
+            only of alphabetical characters or spaces.
 
     Raises:
-        ValueError: If the input contains characters other than alphabetical characters or spaces.
+        ValueError: If the input contains characters
+            other than alphabetical characters or spaces.
     """
     while True:
         try:
             # Prompt the user for input and remove leading/trailing whitespace
             value = input(f"{prompt}\n").strip()
 
-            # Check if the input consists of string starting with at least 3 letters followed by optional spaces and another string.
+            # Check the input: minimum 3 letters, allows a single space
             if re.match("^[a-zA-Z]{3,} ?[a-zA-Z]*$", value):
                 return value
             else:
                 # Raise ValueError for invalid input
-                raise ValueError("Invalid input. Please enter alphabetical characters only. (Minimum 3 characters. Can include space.)")
+                raise ValueError(
+                    "Invalid input. Please enter alphabetical characters only."
+                    " (Minimum 3 characters. Can include space.)"
+                )
         except ValueError as e:
             # Print the error message
             print(e)  # Print the error message for invalid input
 
+
 def add_new_student_menu():
-    """
-    Add a new student through a menu-driven interface.
-    """
+    """Add a new student through a menu-driven interface."""
     clear_console()  # Clear the console screen
     print_menu_title("Add New Student")  # Print menu title
 
@@ -289,22 +321,38 @@ def add_new_student_menu():
     student_surname = get_valid_string_input("Enter student surname: ")
 
     # Concatenate first name and last name
-    student_full_name = f"{student_name.capitalize()} {student_surname.capitalize()}"
+    student_full_name = (
+        f"{student_name.title()} {student_surname.title()}"
+    )
 
     # Check if student has medical conditions
     while True:
         print(f"\nNew Student: {student_full_name}")
-        has_medical_conditions = input("Does the student have any medical conditions? (y/n): \n").strip().lower()
-        clear_console() 
+        has_medical_conditions = (
+            input("Does the student have any medical conditions? (y/n): \n")
+            .strip()
+            .lower()
+        )
+        clear_console()
 
-        if has_medical_conditions == 'y':
-            allergies = input("Enter allergies (Press enter to skip): \n").strip()
-            dietary = input("Enter dietary restrictions (Press enter to skip): \n").strip()
-            medication = input("Enter medications (Press enter to skip): \n").strip()
-            special_needs = input("Enter special needs (Press enter to skip): \n").strip()
-            notes = input("Enter any additional notes (Press enter to skip): \n").strip()
+        if has_medical_conditions == "y":
+            allergies = input(
+                "Enter allergies (Press enter to skip): \n"
+            ).strip()
+            dietary = input(
+                "Enter dietary restrictions (Press enter to skip): \n"
+            ).strip()
+            medication = input(
+                "Enter medications (Press enter to skip): \n"
+            ).strip()
+            special_needs = input(
+                "Enter special needs (Press enter to skip): \n"
+            ).strip()
+            notes = input(
+                "Enter any additional notes (Press enter to skip): \n"
+            ).strip()
             break
-        elif has_medical_conditions == 'n':
+        elif has_medical_conditions == "n":
             allergies = ""
             dietary = ""
             medication = ""
@@ -333,109 +381,177 @@ def add_new_student_menu():
         return
     else:
         # Create a new student object
-        new_student = Student(student_full_name, allergies, dietary, medication, special_needs, notes)
+        new_student = Student(
+            student_full_name,
+            allergies,
+            dietary,
+            medication,
+            special_needs,
+            notes
+        )
 
         # Add the student to the selected classroom
         new_student.add_student(classroom_options[choice - 1])
 
-    print(f"Student {student_full_name} added to classroom {classroom_options[choice - 1]}")
+    print(
+        f"Student {student_full_name} added to classroom "
+        f"{classroom_options[choice - 1]}"
+    )
     press_enter_to_continue()
 
+
 def add_new_classroom():
-    """
-    Creates a new classroom worksheet based on the entered name.
-    """
+    """Creates a new classroom worksheet based on the entered name."""
     # Initialize a list to store existing classroom names
     classroom_names = []
-    
+
     # Retrieve all worksheets from the spreadsheet
     all_classrooms = SHEET.worksheets()
-    
+
     # Clear the console screen and print menu title
     clear_console()
     print_menu_title("Add Classroom")
     print("To cancel and return to Main Menu press 'Q'.\n")
-    
+
     # Populate the classroom_names list with existing classroom names
     for classroom in all_classrooms:
         classroom_names.append(classroom.title)
-    
+
     print("\nClassroom name format: YEAR + LETTER ")
-    
+
     while True:
         # Prompt the user to enter the new classroom name
-        classroom_name = input("Please enter the new classroom name: \n").upper().strip()
+        classroom_name = (
+            input("Please enter the new classroom name: \n").upper().strip()
+        )
 
         # Check if the user wants to cancel
         if classroom_name.lower() == "q":
             break
-        
+
         # Check if the entered classroom name already exists
         elif classroom_name in classroom_names:
-            print(f"\nThis classroom already exists. Please enter a different classroom name.")
+            print(
+                f"\nThis classroom already exists. "
+                f"Please enter a different classroom name."
+            )
             print("Or press 'Q' to return to the main menu.")
-        
+
         # Validate the format of the entered classroom name
-        elif re.match('^([1-9]|1[0-2])[a-zA-Z]$', classroom_name):
+        elif re.match("^([1-9]|1[0-2])[a-zA-Z]$", classroom_name):
             classroom_name = classroom_name.upper()
-            
+
             # Add a new worksheet with the entered classroom name
             SHEET.add_worksheet(title=classroom_name, rows=100, cols=20)
-            
+
             # Add header row to the new worksheet
-            SHEET.worksheet(classroom_name).append_row(["Id", "Name", "Allergies", "Dietary", "Medication", "Special Needs", "Notes"], table_range="A1")
-            
+            SHEET.worksheet(classroom_name).append_row(
+                [
+                    "Id",
+                    "Name",
+                    "Allergies",
+                    "Dietary",
+                    "Medication",
+                    "Special Needs",
+                    "Notes",
+                ],
+                table_range="A1",
+            )
+
             print(f"\nNew classroom successfully created: {classroom_name}")
             press_enter_to_continue()
             break
 
         else:
-            print("\nInvalid classroom name format. Please enter in the format YEAR + LETTER (e.g., 2B, 4C, 10A)")
+            print(
+                "\nInvalid classroom name format. "
+                "Please enter in the format YEAR + LETTER (e.g., 2B, 4C, 10A)"
+            )
             print("Or press 'Q' to return to the main menu.")
+
 
 def remove_student():
     """
     Removes a selected student from the spreadsheet.
     """
-    # Clear the console and initialize menu title and empty lists for student data
+    # Clear the console, initialize menu title and empty lists for student data
     clear_console()
     menu_title = "Remove Student"
     students_found_menu = []
     student_worksheet_location = []
     print_menu_title("Remove Student")
-    
+
     # Get the student's name to be removed
-    search_keyword = get_valid_string_input("Enter the student's name to remove: \n")
+    search_keyword = get_valid_string_input(
+        "Enter the student's name to remove: \n"
+    )
 
     try:
         all_worksheets = SHEET.worksheets()
         for worksheet in all_worksheets:
             # Search for the student's name in each worksheet
-            for cell in worksheet.findall(search_keyword, in_column=2, case_sensitive=False):
+            for cell in worksheet.findall(
+                search_keyword, in_column=2, case_sensitive=False
+            ):
                 classroom_name = worksheet.title
                 search_keyword_row = cell.row
-                student_name = SHEET.worksheet(classroom_name).cell(search_keyword_row, 2).value
-                student_id = SHEET.worksheet(classroom_name).cell(search_keyword_row,1).value
+                student_name = (
+                    SHEET.worksheet(classroom_name)
+                    .cell(search_keyword_row, 2)
+                    .value
+                )
+                student_id = (
+                    SHEET.worksheet(classroom_name)
+                    .cell(search_keyword_row, 1)
+                    .value
+                )
                 # Add the student's data to the menu if not already added
-                if f"{student_name} in classroom {classroom_name}" not in students_found_menu:
-                    students_found_menu.append(f"Id: {student_id}, Name: {student_name}, Classroom: {classroom_name}")
-                    student_worksheet_location.append([classroom_name, search_keyword_row])
+                if (
+                    f"{student_name} in classroom {classroom_name}"
+                    not in students_found_menu
+                ):
+                    students_found_menu.append(
+                        f"Id: {student_id}, Name: {student_name}, "
+                        f"Classroom: {classroom_name}"
+                    )
+                    student_worksheet_location.append(
+                        [classroom_name, search_keyword_row]
+                    )
 
         # If students are found, display them in a menu
-        if students_found_menu != []:        
+        if students_found_menu != []:
             show_menu(students_found_menu, menu_title)
             choice = get_valid_choice(students_found_menu)
             if choice == len(students_found_menu) + 1:
                 return  # Quit
             else:
-                print(f"Are you sure you want to remove student {students_found_menu[choice -1]}?")
-                confirm_delete = input('Type "yes" to confirm or press any key to return to the main menu.\n').strip().lower()
+                print(
+                    f"Are you sure you want to remove student "
+                    f"{students_found_menu[choice -1]}?"
+                )
+                confirm_delete = (
+                    input(
+                        'Type "yes" to confirm or press any '
+                        'key to return to the main menu.\n'
+                    )
+                    .strip()
+                    .lower()
+                )
                 if confirm_delete == "yes":
                     # Delete the selected student from the worksheet
-                    Student.delete_student(student_worksheet_location[choice - 1][0], student_worksheet_location[choice - 1][1])
-                    print(f"The student {students_found_menu[choice -1]} successfully deleted.")
+                    Student.delete_student(
+                        student_worksheet_location[choice - 1][0],
+                        student_worksheet_location[choice - 1][1],
+                    )
+                    print(
+                        f"The student {students_found_menu[choice -1]} "
+                        f"successfully deleted."
+                    )
                 else:
-                    print(f"Deletion of student {students_found_menu[choice-1]} cancelled.")
+                    print(
+                        f"Deletion of student "
+                        f"{students_found_menu[choice-1]} cancelled."
+                    )
                     press_enter_to_continue()
                     return
         else:
@@ -444,9 +560,10 @@ def remove_student():
     except Exception as e:
         # Print error message if an error occurs
         print(f"An error occurred while removing student: {e}")
-    
+
     # Prompt the user to return to the main menu
     press_enter_to_continue()
+
 
 def remove_classroom():
     """
@@ -455,10 +572,10 @@ def remove_classroom():
     # Initialize menu title and an empty list to store classroom names
     menu_title = "Remove Classroom"
     classroom_menu = []
-    
+
     # Retrieve all worksheets from the spreadsheet
     all_classrooms = SHEET.worksheets()
-    
+
     # Populate classroom_menu list with existing classroom names
     for classroom in all_classrooms:
         if classroom.title != "sid":
@@ -466,45 +583,64 @@ def remove_classroom():
 
     # Display the menu with classroom options
     show_menu(classroom_menu, menu_title)
-    
+
     # Get user choice for the classroom to be removed
     choice = get_valid_choice(classroom_menu)
-    
+
     # Check if the user chose to cancel
     if choice == len(classroom_menu) + 1:
         return
     else:
         # Confirm classroom deletion
-        print(f"Are you sure you want to remove classroom {classroom_menu[choice - 1]} ?")
-        confirm_delete = input('Type "yes" to confirm or any key to return to the main menu.\n').strip().lower()
+        print(
+            f"Are you sure you want to remove classroom "
+            f"{classroom_menu[choice - 1]} ?"
+        )
+        confirm_delete = (
+            input(
+                'Type "yes" to confirm or any key to '
+                'return to the main menu.\n'
+            )
+            .strip()
+            .lower()
+        )
 
         if confirm_delete == "yes":
             try:
                 # Get the worksheet to be deleted
-                worksheet_to_delete = SHEET.worksheet(classroom_menu[choice - 1])
-                
+                worksheet_to_delete = (
+                    SHEET.worksheet(classroom_menu[choice - 1])
+                )
+
                 # Delete the selected worksheet
                 SHEET.del_worksheet(worksheet_to_delete)
-                
+
                 # Notify the user about the successful removal
-                print(f"Classroom {classroom_menu[choice - 1]} successfully removed.")
+                print(
+                    f"Classroom {classroom_menu[choice - 1]} "
+                    f"successfully removed."
+                )
             except Exception as e:
                 # Print error message if worksheet deletion fails
                 print(f"An error occurred while removing classroom: {e}")
-            
+
             # Prompt the user to return to the main menu
             press_enter_to_continue()
         else:
-            print(f"Deletion of classroom {classroom_menu[choice-1]} cancelled.")
+            print(
+                f"Deletion of classroom {classroom_menu[choice-1]} cancelled."
+            )
             press_enter_to_continue()
 
 
 def select_classroom(check_empty_med_cells=False):
     """
-    Displays a menu for selecting a classroom and shows the students' information in the chosen classroom.
+    Displays a menu for selecting a classroom and shows the students'
+        information in the chosen classroom.
 
     Args:
-        check_empty_med_cells (bool, optional): Flag indicating whether to check for empty medical cells. Defaults to False.
+        check_empty_med_cells (bool,optional): Flag indicating whether to check
+            for empty medical cells. Defaults to False.
             Used in filter_worksheet function.
 
     Raises:
@@ -513,32 +649,49 @@ def select_classroom(check_empty_med_cells=False):
     try:
         menu_title = "Select Classroom"
         classroom_options = []
-        
+
         # Retrieve all classroom options from the worksheets
         all_classrooms = SHEET.worksheets()
         for classroom in all_classrooms:
             if classroom.title != "sid":
                 classroom_options.append(classroom.title)
-        
+
         # Show the menu to select a classroom
         show_menu(classroom_options, menu_title)
         choice = get_valid_choice(classroom_options)
-        
+
         # Check if the user wants to quit
         if choice == len(classroom_options) + 1:
             return  # Quit
         else:
             chosen_classroom = classroom_options[choice - 1]
             if check_empty_med_cells:
-                # Filter and display the classroom table with empty medical cells
-                classroom_table = filter_worksheet("name", "allergies", "dietary", "medication", "special needs", "notes", class_name=chosen_classroom, check_empty_med_cells=True)
+                # Filter the classroom table with empty medical cells
+                classroom_table = filter_worksheet(
+                    "name",
+                    "allergies",
+                    "dietary",
+                    "medication",
+                    "special needs",
+                    "notes",
+                    class_name=chosen_classroom,
+                    check_empty_med_cells=True,
+                )
                 clear_console()
                 print_menu_title(f"Classroom: {chosen_classroom}")
                 console.print(classroom_table)
                 press_enter_to_continue()
             else:
                 # Filter and display the classroom table
-                classroom_table = filter_worksheet("name", "allergies", "dietary", "medication", "special needs", "notes", class_name=chosen_classroom)
+                classroom_table = filter_worksheet(
+                    "name",
+                    "allergies",
+                    "dietary",
+                    "medication",
+                    "special needs",
+                    "notes",
+                    class_name=chosen_classroom,
+                )
                 clear_console()
                 print_menu_title(f"Classroom: {chosen_classroom}")
                 console.print(classroom_table)
@@ -547,6 +700,7 @@ def select_classroom(check_empty_med_cells=False):
         # Handle any unexpected errors
         print("An error occurred:", e)
         press_enter_to_continue()
+
 
 def classroom_menu():
     """
@@ -560,48 +714,56 @@ def classroom_menu():
     """
     menu_title = "Classroom Menu"
     classroom_options = ["My Classroom", "My Classroom - Extra Care"]
-    
+
     # Display the menu options
     show_menu(classroom_options, menu_title)
-    
+
     # Get the user's choice
     choice = get_valid_choice(classroom_options)
-    
+
     if choice == len(classroom_options) + 1:
         return  # Quit
     elif choice == 1:
-        select_classroom()  # Call select_classroom without checking for empty medical cells
+        # Call select_classroom without checking for empty medical cells
+        select_classroom()
     elif choice == 2:
-        select_classroom(check_empty_med_cells=True)  # Call select_classroom with checking for empty medical cells
+        # Call select_classroom with checking for empty medical cells
+        select_classroom(check_empty_med_cells=True)
+
 
 def kitchen_menu():
     """
-    Displays a menu for selecting kitchen options and performs corresponding actions.
+    Displays a menu for selecting kitchen options
+        and performs corresponding actions.
 
     Options:
     1. Dietary Requirements (Displays students with dietary information)
     """
     menu_title = "Kitchen Menu"
     kitchen_options = ["Dietary Requirements"]
-    
+
     # Display the menu options
     show_menu(kitchen_options, menu_title)
-    
+
     # Get the user's choice
     choice = get_valid_choice(kitchen_options)
-    
+
     if choice == len(kitchen_options) + 1:
         return  # Quit
     elif choice == 1:
         clear_console()
         print_menu_title("Dietary Requirements")
         # Display students' dietary requirements
-        filter_all_worksheets("name", "dietary", "allergies", check_empty_med_cells=True)
-        press_enter_to_continue()  # Wait for user to press Enter before returning to main menu
+        filter_all_worksheets(
+            "name", "dietary", "allergies", check_empty_med_cells=True
+        )
+        press_enter_to_continue()
+
 
 def medical_menu():
     """
-    Displays a menu for selecting medical options and performs corresponding actions.
+    Displays a menu for selecting medical options
+        and performs corresponding actions.
 
     Options:
     1. Allergies (Displays students with allergies)
@@ -612,34 +774,53 @@ def medical_menu():
     6. All (Displays students with all medical information)
     """
     menu_title = "Medical Menu"
-    medical_options = ["Allergies", "Dietary", "Medication", "Special Needs", "Notes", "All"]
-    
+    medical_options = [
+        "Allergies",
+        "Dietary",
+        "Medication",
+        "Special Needs",
+        "Notes",
+        "All",
+    ]
+
     # Display the menu options
     show_menu(medical_options, menu_title)
-    
+
     # Get the user's choice
     choice = get_valid_choice(medical_options)
-    
+
     if choice == len(medical_options) + 1:
         return  # Quit
     elif 1 <= choice <= len(medical_options):
         selected_option = medical_options[choice - 1]
         clear_console()
         print_menu_title(selected_option)
-        
+
         # Filter worksheets based on the selected medical option
         if choice == 6:
             # For option 'All', display all medical information
-            filter_all_worksheets("name", "allergies", "dietary", "medication", "special needs", "notes", check_empty_med_cells=True)
+            filter_all_worksheets(
+                "name",
+                "allergies",
+                "dietary",
+                "medication",
+                "special needs",
+                "notes",
+                check_empty_med_cells=True,
+            )
         else:
             # For individual medical options, display respective information
-            filter_all_worksheets("name", selected_option.lower(), check_empty_med_cells=True)
-        
-        press_enter_to_continue()  # Wait for user to press Enter before returning to main menu
+            filter_all_worksheets(
+                "name", selected_option.lower(), check_empty_med_cells=True
+            )
+
+        press_enter_to_continue()
+
 
 def admin_menu():
     """
-    Displays a menu for administrative tasks and performs the corresponding actions.
+    Displays a menu for administrative tasks
+        and performs the corresponding actions.
 
     Options:
     1. Add Student
@@ -649,12 +830,17 @@ def admin_menu():
     """
     # Display the admin menu options
     menu_title = "Admin Menu"
-    admin_options = ["Add Student", "Add Classroom", "Remove Student", "Remove Classroom"]
+    admin_options = [
+        "Add Student",
+        "Add Classroom",
+        "Remove Student",
+        "Remove Classroom",
+    ]
     show_menu(admin_options, menu_title)
-    
+
     # Get the user's choice
     choice = get_valid_choice(admin_options)
-    
+
     # Perform actions based on user's choice
     if choice == len(admin_options) + 1:
         return  # Quit
@@ -669,27 +855,29 @@ def admin_menu():
         elif choice == 4:
             remove_classroom()  # Remove a classroom
 
+
 def main():
     """
     Displays the main menu and executes the selected option.
 
-    The main menu allows the user to navigate to different sections of the program, including Classroom, Kitchen, Medical, and Admin.
+    The main menu allows the user to navigate to different sections
+        of the program, including Classroom, Kitchen, Medical, and Admin.
     """
     while True:
         # Display the main menu options
         menu_title = "Main Menu"
         main_options = ["Classroom", "Kitchen", "Medical", "Admin"]
         show_menu(main_options, menu_title)
-        
+
         # Get the user's choice
         choice = get_valid_choice(main_options)
-        
+
         # Perform actions based on user's choice
         if choice == len(main_options) + 1:
             # Clear the console and pretend to exit the program
             clear_console()
             print("Goodbye!")
-            press_enter_to_continue() 
+            press_enter_to_continue()
         elif choice == 1:
             classroom_menu()  # Navigate to Classroom menu
         elif choice == 2:
@@ -698,5 +886,6 @@ def main():
             medical_menu()  # Navigate to Medical menu
         elif choice == 4:
             admin_menu()  # Navigate to Admin menu
+
 
 main()
