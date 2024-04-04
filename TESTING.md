@@ -1,5 +1,13 @@
 # Testing
 
+## Index
+
+- [PEP8 Validation](#pep8-validation)
+- [Testing User Stories](#testing-user-stories)
+- [Bugs](#bugs)
+- [Known Bugs](#known-bugs)
+- [Manual Testing](#manual-testing)
+
 This project was built using [Code Institute Project Template](https://github.com/Code-Institute-Org/p3-template). HTML and JavaScript were provided with it. Therefore, no HTML, JavaScript, or browser compatibility tests were conducted.
 
 ## PEP8 Validation
@@ -60,16 +68,19 @@ The `run.py` and `student.py` files have been reformatted to adhere to PEP8 stan
 
     <img src="assets/images/features/remove-classroom.png" alt="remove classroom" style="width:50%;">
 
-## Bugs
+## Bugs
 
 - While attempting to install the `rich` library in Gitpod, the system indicated that the library was already installed, although it was never installed previously. This issue caused problems when deploying the project to Heroku, as the project failed to run due to the `rich` library missing from the `requirements.txt` file.
 
   **Solution:** Manually added `rich==13.7.1` to the `requirements.txt` file.
 
-- The "Quit" option in the main menu was actually terminating the program abruptly, causing it to stop entirely and requiring a page reload to restart. This behavior was inconvenient for users as it interrupted their workflow. To address this issue, the "Quit" option was replaced with a system exit imitation that clears the console, displays a goodbye message, and returns the user back to the main menu seamlessly.
+- The "Quit" option in the main menu was actually terminating the program abruptly, causing it to stop entirely and requiring a page reload to restart. This behaviour was inconvenient for users as it interrupted their workflow. To address this issue, the "Quit" option was replaced with a system exit imitation that clears the console, displays a goodbye message, and returns the user back to the main menu seamlessly.
 
+## Known Bugs
 
-### Known Bugs
+- There is a bug that may display artefacts from previous interactions in the upper section of the screen. This issue is not immediately visible until the user scrolls up the screen. It occurs due to the console template's limitations of a 24-character height and 80-character width. During the project planning phase, I anticipated this limitation and designed the project with scrollable content in mind. Initially, I did not encounter this problem while testing the project in Gitpod. However, after deploying the project, overflow text lines became permanently stuck in the upper part of the screen, resembling display artefacts. These artefacts may accumulate if vertical overflow continues to occur. Despite my efforts, I have not been able to resolve this issue completely.
+
+    - To mitigate overflow, I implemented several measures. Firstly, I modified the display of tables. Previously, dietary requirements and medical tables were designed to display all tables for all classrooms simultaneously. I changed this to display only one class at a time, requiring the user to press enter to view another table. This significantly reduced the amount of scrollable content. Additionally, I limited the number of students entered per classroom to 4 or 5. While this is not a strict restriction, users can add as many students as they like. This helped further reduce the overflow effect, though it has not been completely eliminated. While not immediately visible, users may encounter overflow artefacts if they scroll up the main menu screen or tables.
 
 ## Manual Testing
 

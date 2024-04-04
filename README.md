@@ -310,7 +310,7 @@ This structure allows for organized and efficient management of student informat
 
 - [re](https://docs.python.org/3/library/re.html): A Python library providing support for regular expressions (RE). Used for user input validation.
 
-- [rich.console](https://rich.readthedocs.io/en/stable/introduction.html): A Python library for adding colour and style to terminal text output. Used to print rich table.
+- [rich.console](https://rich.readthedocs.io/en/stable/introduction.html): A Python library for adding colour and style to terminal text output. Used to print rich tables.
 
 - [rich.table](https://rich.readthedocs.io/en/stable/introduction.html): A Python library for creating and displaying tables with rich text formatting in the terminal. 
 
