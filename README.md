@@ -163,11 +163,11 @@ Google Sheets was chosen as the data storage method for this project, integrated
 
 The Google Sheet is divided into multiple worksheets, with each worksheet representing a classroom. For example, worksheets may be titled "2A", "2B", "2C", etc., where each represents a distinct classroom.
 
-![Worksheets](/assets/images/data-model/worksheets.png)
+<img src="assets/images/data-model/worksheets.png" alt="worksheets" style="width:60%;">
 
 Additionally, there is an extra worksheet called "sid" (abbreviation for student ID), which is not associated with any specific classroom. This worksheet serves the sole purpose of tracking student IDs, with each new student created incrementing the student ID count by one. This ensures that the student ID tracker remains intact even in the event of system malfunctions.
 
-![Student Id counter](/assets/images/data-model/student-id-counter.png)
+<img src="assets/images/data-model/student-id-counter.png" alt="student id counter" style="width:40%;">
 
 The structure of each classroom worksheet includes the following columns:
 
@@ -181,7 +181,7 @@ The structure of each classroom worksheet includes the following columns:
 
 This structure allows for organized and efficient management of student information, ensuring that important details are easily accessible and properly tracked for each student. 
 
-![Table Structure](/assets/images/data-model/table-structure.png)
+<img src="assets/images/data-model/table-structure.png" alt="table structure" style="width:80%;">
 
 ## Setting Up Google API
 
