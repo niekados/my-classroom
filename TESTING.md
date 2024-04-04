@@ -14,8 +14,6 @@ The `run.py` and `student.py` files have been reformatted to adhere to PEP8 stan
 
   <img src="assets/images/python-linter/student.png" alt="'student' validation" style="width:60%;">
 
-## Manual Testing
-
 ## Testing User Stories
 
 - **As a teacher, I want easy access to a classroom overview with all students listed.**
@@ -64,4 +62,17 @@ The `run.py` and `student.py` files have been reformatted to adhere to PEP8 stan
 
 ## Bugs
 
+- While attempting to install the `rich` library in Gitpod, the system indicated that the library was already installed, although it was never installed previously. This issue caused problems when deploying the project to Heroku, as the project failed to run due to the `rich` library missing from the `requirements.txt` file.
+
+  **Solution:** Manually added `rich==13.7.1` to the `requirements.txt` file.
+
+- The "Quit" option in the main menu was actually terminating the program abruptly, causing it to stop entirely and requiring a page reload to restart. This behavior was inconvenient for users as it interrupted their workflow. To address this issue, the "Quit" option was replaced with a system exit imitation that clears the console, displays a goodbye message, and returns the user back to the main menu seamlessly.
+
+
 ### Known Bugs
+
+## Manual Testing
+
+**[Download Excel Testing File](/assets/testing-table/testing.xlsx)**
+
+![Testing table](/assets/images/testing/testing.webp)

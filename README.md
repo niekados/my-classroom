@@ -1,5 +1,7 @@
 # MyClassroom: Empowering Teachers, Supporting Every Child
 
+**[Link to the deployed application](https://my-classroom-56b1fb9a456c.herokuapp.com/)**
+
 ## Index
 
 - [Introduction](#introduction)
